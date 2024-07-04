@@ -1,0 +1,3061 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jetauto</title>
+    <style>
+        html,
+        body,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        a {
+            color: #03b126;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            height: 120px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .header nav ul li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            margin-top: 130px;
+            overflow: hidden;
+        }
+
+        .main {
+            flex: 1;
+            /* padding: 20px; */
+            overflow-y: auto;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+
+        .sidebar-left,
+        .sidebar-right {
+            width: 15%;
+            position: fixed;
+            /* top: 130px; */
+            height: calc(100vh - 140px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .sidebar-left {
+            left: 0;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .sidebar-right {
+            right: 0;
+            border-left: 2px solid #dadde1;
+            /* height: auto; */
+            color: #525860;
+            display: block;
+            text-decoration: none;
+            line-height: 1;
+            margin-top: 20px;
+        }
+
+        .sidebar-right ul {
+            overflow-y: auto;
+        }
+
+        .sidebar-right ul li {
+            width: 70%;
+        }
+
+
+        .sidebar-left a,
+        .sidebar-right a {
+            display: block;
+            margin-bottom: 2px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            padding: 10px;
+        }
+
+        .sidebar-left a:hover,
+        .sidebar-right a:hover {
+            background-color: #ddd;
+        }
+
+        .document-toc-link.document-toc-link:not(.button) {
+            border-left: 2px solid #dadde1;
+            color: #525860;
+            text-decoration: none;
+        }
+
+        .document-toc-link.document-toc-link:not(.button)[aria-current]:not([aria-current=""]):not([aria-current=false]) {
+            background-color: #0085f230;
+            border-left: 2px solid #0069c2;
+            color: #0069c2;
+            font-weight: 600;
+        }
+
+
+
+        .footer {
+            position: sticky;
+            background-color: #333;
+            width: 100%;
+            height: 100px;
+            color: #fff;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .section {
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+
+
+        .cen-content h2,
+        .cen-content h3,
+        .cen-content h4,
+        .cen-content h5,
+        .cen-content h6,
+        .cen-content p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .cen-content h2 {
+            font-size: 2.25rem;
+            margin-top: .5em;
+            text-align: center;
+        }
+
+        .cen-content h3 {
+            font-size: 1.6rem;
+            margin-left: 0.5em;
+
+        }
+
+        .cen-content h4 {
+            font-size: 1.4rem;
+            /* margin-top: 0.5em; */
+            margin-left: 1em;
+        }
+
+        .cen-content h5 {
+            font-size: 1.35rem;
+            margin-left: 1.5em;
+        }
+
+        .cen-content h6 {
+            font-size: 1.2rem;
+            margin-left: 2em;
+        }
+
+        /* 图片大小 */
+        .cen-content img {
+            max-width: 80%;
+            vertical-align: middle;
+            image-orientation: from-image;
+        }
+
+
+
+        p>.md-image:only-child:not(.md-img-error) img,
+        p>img:only-child {
+            display: block;
+            margin: 0 auto;
+            padding-top: 10px;
+        }
+
+
+        .cen-content table img {
+            width: 100px;
+            height: auto;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 700px;
+        }
+
+        #headcolumn tr th {
+            width: 130px;
+        }
+
+        #headcolumn tr td {
+            text-align: left;
+        }
+
+        table tr th {
+            background-color: #ffc000;
+        }
+
+        table tr td,
+        th {
+
+            border: #111 1px solid;
+            font-size: 1rem;
+            text-align: center;
+            padding: 10px;
+            margin: auto 0;
+        }
+
+        .cen-content ul li {
+            list-style-type: none;
+            font-size: 1rem;
+            text-indent: 1rem;
+            margin-top: 10px;
+            padding-left: 1.5rem;
+        }
+
+        #codeblocks {
+            color: #f30010;
+            width: 800px;
+            border: 2px black solid;
+            text-indent: 2;
+        }
+
+        #codeblocks img {
+            margin-left: 10px;
+            padding: 0;
+        }
+
+        .cen-content p {
+            /* width: 800px; */
+            margin-left: 1.2em;
+            text-indent: 2rem;
+            line-height: 1.7;
+            font-size: 0.9rem;
+        }
+
+        .cen-content ul li p,
+        .cen-content span p {
+            font-size: 1.1rem;
+        }
+
+        hr {
+            width: 800px;
+            margin: 10px auto;
+        }
+
+
+        /* 响应式 */
+        @media (min-width: 1200px) {
+            .sidebar-right {
+                display: block;
+                padding-bottom: 0;
+                overflow-y: auto;
+            }
+        }
+
+        @media (min-width: 769px) {
+
+
+            .main-wrapper {
+                display: grid;
+                gap: 3rem;
+                grid-template-areas: "sidebar main";
+                grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+                padding-left: 1.5rem;
+                padding-right: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <div>
+                    <h1>菜单栏</h1>
+                </div>
+                <div>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+            </nav>
+
+        </div>
+        <div class="content">
+            <div class="sidebar-left">
+                <h2>教程</h2>
+                <ul id="sidebarList">
+                    <!-- JavaScript 会动态填充章节列表 -->
+                </ul>
+            </div>
+
+            <div class="main">
+                <div class="section">
+                    <div id="sectionContainer">
+                        <!-- JavaScript 会动态填充章节内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-right">
+                <ul id="sidebarRight">
+
+                </ul>
+            </div>
+        </div>
+        <div class="footer">Footer - Sticky at the bottom</div>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = document.querySelector('.header').offsetHeight;
+                    const targetOffset = target.offsetTop - headerOffset;
+
+                    window.scrollTo({
+                        top: targetOffset,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('.document-toc-link');
+
+            links.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault(); // 阻止默认的点击行为
+
+                    // 移除当前具有 aria-current="true" 的元素的 aria-current 属性
+                    const currentActive = document.querySelector('.document-toc-link[aria-current="true"]');
+                    if (currentActive) {
+                        currentActive.removeAttribute('aria-current');
+                    }
+
+                    // 将点击的元素设置为 aria-current="true"
+                    this.setAttribute('aria-current', 'true');
+                });
+            });
+        });
+
+
+    </script>
+    <script>
+        // 定义章节内容数组
+        const chapters = [
+            {
+                title: 'Jetauto使用入门',
+                content: `
+        <div class="cen-content" 一>
+        <h2 id="Jetauto使用入门">第一章 Jetauto使用入门</h2>
+        <h3 id="认识Jetauto">1.1 认识Jetauto</h3>
+        <span>
+            <h4 id="产品简介">1.1.1 产品简介</h4>
+            <p>
+                JetRos-AutoPro是面向ROS教育场景开发的入门型ROS轮式机器人，它搭载了NVIDA Jetson
+                Nano、高性能磁编码电机，旋转云台、激光雷达、3D深度相机、7寸液晶显示屏等高性能硬件配置，可实现机器人运动控制、建图导航、路径规划、追踪避障、自主驾驶、人体
+                特征识别、体感交互、语音交互等应用。
+            </p>
+            <p>
+                JetRos-AutoPro有多种配置可选，不仅可以更好地满足用户对机器人SLAM功能的学习和验证，
+                还为ROS开发提供快速便捷的集成方案。JetRos-AutoPro配套ROS课程，并涵盖海量技术资料、功能源码，课程文档和真人讲解视频，助你快速玩转ROS机器人。
+            </p>
+        </span>
+        <span>
+            <h4 id="硬件结构与模块介绍">1.1.2 硬件结构与模块介绍</h4>
+            <p>
+                此处以JetRos-AutoPro Pro为例进行介绍，其它版本所涉及到的硬件以及功能与此一致。
+            </p>
+            <p><img src="img/one/1.jpg"></p>
+            <!-- 斑马表单 -->
+            <table>
+                <tr style="background-color: antiquewhite;">
+                    <th>名称</th>
+                    <th>图片</th>
+                    <th>功能</th>
+                </tr>
+                <tr>
+                    <td>Jetson Nano控制系统</td>
+                    <td><img src="img/one/Jetson Nano控制系统.png"></td>
+                    <td>包括扩展板和开发板，可将实时计算机视觉应用到各 种复杂的深度神经网络模型， 创建全新的AI项目平台。</td>
+                </tr>
+                <tr>
+                    <td>3D深度相机</td>
+                    <td><img src="img/one/3D深度相机.png"></td>
+                    <td>高清摄像，深度图像数据处理，实现多场景、高精度的AI识别。</td>
+                </tr>
+                <tr>
+                    <td>单目相机</td>
+                    <td><img src="img/one/单目相机.jpg"></td>
+                    <td>高清170°广角摄像，实现多场景的AI视觉识别。</td>
+                </tr>
+                <tr>
+                    <td>激光雷达</td>
+                    <td><img src="img/one/激光雷达.jpg"></td>
+                    <td>全方位精确测量，实现测距、避障、多种建图等功能。</td>
+                </tr>
+                <tr>
+                    <td>HTD-35H总线舵机</td>
+                    <td><img src="img/one/HTD-35H总线舵机.png"></td>
+                    <td>35kg的扭矩，为机器人提供充沛的动力。</td>
+                </tr>
+                <tr>
+                    <td>HTS-20H总线舵机</td>
+                    <td><img src="img/one/HTS-20H总线舵机.png"></td>
+                    <td>作为云台舵机，具备强大扭矩。</td>
+                </tr>
+                <tr>
+                    <td>7寸液晶显示屏</td>
+                    <td><img src="img/one/7寸液晶显示屏.jpg"></td>
+                    <td>可实现触摸功能，使用户快速体验及调试机器人。</td>
+                </tr>
+                <tr>
+                    <td>六路麦克风阵列模块（选配）</td>
+                    <td><img src="img/one/六路麦克风阵列模块（选配）.png"></td>
+                    <td>可实现声源定位、语音控制、语音导航功能。</td>
+                </tr>
+                <tr>
+                    <td>扬声器</td>
+                    <td><img src="img/one/扬声器.png"></td>
+                    <td>播报语音，实现语音交互功能。</td>
+                </tr>
+            </table>
+        </span>
+        <span>
+            <h4 id="硬件连接">1.1.3 硬件连接</h4>
+            <p>机器人主板、扩展板和各硬件模块的连接示意图如下：</p>
+            <p>
+                <img src="img/one/2.jpg">
+            </p>
+            <h5 id="产品组成">（1）产品组成</h5>
+            <p>JetsonAuto智能小车由 车体结构、jetson Nano主板、天线、深度相机、7 寸触摸屏、视觉机械臂组成。本体包含 A1/G4 雷达、4
+                个直流电机、一个云台舵机；视觉机械臂包含 4
+                个舵机与 1 个单目相机。</p>
+            <h5 id="实现功能">（2）实现功能</h5>
+            <p>可以实现小车的基础运动；雷达建图、导航；AI 视觉类玩法（颜色、标签、二维码识别，AR
+                视觉，机器学习，无人驾驶等）；其中雷达和深度相机相结合也可实现三维建图与导航等玩法，使用屏幕可以更加方便用户对机器人的使用及调试；加入视觉机械臂可以实现夹取与放置的相关玩法（色块的抓取、分拣、导航搬运等）。
+            </p>
+        </span>
+        <h3 id="Jetauto的充电说明及锂电池注意事项">1.2 Jetauto 的充电说明及锂电池注意事项</h3>
+        <span>
+            <h4 id="充电说明">1.2.1 充电说明</h4>
+            <p>
+                机器人机器人通过高压 11.1V 6000mAh 锂电池供电，请使用套件附带的专用充电器进行充电。
+                由于机器人在运输途中必须断电，且电池不能充至满电，用户在首次开机前需要先给电 池充电，电池充至满电 12V 电压需要约 4 个小时左右。
+                当机体电压小于过放保护电压时，机器人会关机保护电池，这时候我们只需要连接充电 器将电池充满即可。
+                为了确保机体运行的稳定性，当电池电压小于 10V 时，请及时充电。
+            </p>
+            <h4 id="锂电池相关注意事项">1.2.2 锂电池相关注意事项</h4>
+            <p style="font-size: 1.2rem; color: red; font-weight: bold;">
+                锂电池由于运输中不能充满，初次使用，请先给电池充电。
+            </p>
+            <p>
+            <ul>
+                <li>
+                    <p>
+                        1） 请使用套件附带的专用充电器为机器人充电。电池充电时请关闭扩展板上开关， 请勿对电池边充电边使用。
+                    </p>
+                </li>
+
+                </p>
+                <li>
+                    <p>
+                        2） 充电器在没有接上电源的情况下连接电池，其指示灯显示绿色。充电中充电器 指示灯为红色，当充满指示灯会再次变为绿色。
+                    </p>
+                </li>
+
+                <li>
+                    <p>
+                        3） 请勿
+                        将充电器直接插到 Jetson 主板的 DC 电源接口，如下图所示，否则可能会烧坏主板。
+                    </p>
+                </li>
+                </p>
+                <li>
+                    <p>
+                        4） 充电完成后应及时拔掉充电线，避免过充损坏电池。
+                    </p>
+                </li>
+
+                <li>
+                    <p>
+                        <img src="img/one/3.jpg">
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        5） 为了确保机器人运行效果的稳定，当电池电压小于 10V 时（扩展板蜂鸣器会发出‘滴滴’报警声），此时需要先进行充电，再进行对应
+                        阶段的操作。
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        6） 若预计长时间不使用机器人，请将电池充至满电，并将电池对接线与电源线断开。
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        7） 电池需存储于阴凉干燥的环境中，以免电池寿命因过热、受潮等情况而减短。 请勿敲击、抛掷或踩踏电池。
+                </li>
+                </p>
+                <li>
+                    <p>
+                        8） 请
+                    </p>勿在强静电或强磁场的环境下使用电池，此操作容易使电池的安全保护装置 受到破坏。
+                </li>
+
+                <li>
+                    <p>
+                        9） 请勿将电池接入电源插座，请勿使用金属物体连通电池的正负极。
+                        锂电池本身特性为过度放电会充不进去电，可能会导致电池报废。若长期不使用电池，请先将电池充满电。
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        10） 严禁私自改装、焊接、修改电池充电器或锂电池。
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        11） 电池储存远离高温和各类液体，防止过热、起火或受潮导致功能衰退、减小。
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        12） <span style="color: red;">郑重声明：因未按照上述“注意事项及电池使用规范”规范使用而造成的产品损坏、
+                            经济损失及安全事故等后果，我司不承担任何相关责任。</span>
+                    </p>
+                </li>
+            </ul>
+            </p>
+        </span>
+        <span class="blank"></span>
+
+    </div>
+        `
+                , sidebar: `
+                认识Jetauto,
+                产品简介,
+                硬件结构与模块介绍,
+                硬件连接,
+                Jetauto的充电说明及锂电池注意事项
+                `
+            },
+            {
+                title: 'Linux系统简介及使用入门',
+                content: `
+        <div class="cen-content" 二>
+        <h2 id="two">
+            <span>
+                第二章 Linux系统简介及使用入门
+            </span>
+        </h2>
+        <span 2.1>
+
+            <h3 id="2.1">
+                <span>
+                    2.1 Linux系统简介
+                </span>
+            </h3>
+            <span>
+                <h4 id="2.1.1">
+                    <span>
+                        2.1.1 操作系统介绍
+                    </span>
+                </h4>
+                <p>
+
+                    要知道Linux是什么，首先说一下什么是操作系统。
+
+                    计算机是一台机器，它可以按照用户的要求接收信息、存储数据、处理数据，然后再将处理结果输出（文字、图片、音频、视频等）。
+
+                    硬件是计算机赖以工作的实体，包括显示器、键盘等，软件会按照用户的要求来协调整台计算机的工作。所以操作系统是软件的一部分，是硬件和其它软件沟通的桥梁，可以理解为接口、中间人或者中介等。
+
+                    操作系统会控制其它程序运行，管理系统资源，提供最基本的计算功能，比如管理系统资源，提供最基本的计算功能。
+
+                    我们平时接触到的Windows，大家都不陌生，可以玩游戏、听音乐、看电影，它就是以图形用户界面为基础研发的操作系统。
+
+                </p>
+            </span>
+            <span>
+                <h4 id="2.1.2">2.1.2 Linux发展历史</h4>
+                <p>
+
+                    与大家熟知的 Windows 操作系统软件一样，Linux 也是一个操作系统软件。它的Logo是一只企鹅。与Windows不同的是，Linux是一套开源的操作系统。
+
+                </p>
+                <p>
+                    <img src="img/two/1.jpg">
+                </p>
+                <p>
+                    1993年，大约有100余名程序员参与了Linux内核代码编写、修改工作。
+
+                    1994年，Linux1.0发布，代码量17万行，当时按照完全自由免费的协议。
+
+                    1995年，Bob Young创办了RedHat（小红帽），以GNU、Linux为核心，集成了400多个源代码开放的程序模块，搞出了一种冠以品牌的Linux，即RedHat
+                    Linux，称为Linux发行版，在市场上出售。
+                    1996年6月，Linux 2.0内核发布，此内核有大约40万行代码，并可以支持多个处理器。此时的Linux 已经进入了实用阶段，全球大约有350万人使用。
+
+                </p>
+            </span>
+            <span>
+                <h4 id="2.1.3">2.1.3 Linux的特点</h4>
+                <p>
+                    在过去的20年里，Linux
+                    系统主要被应用于服务器端、嵌入式开发和PC桌面3大领域，其中服务器端领域是重中之重。例如国内很多互联网企业都在使用Linux系统作为其服务器端的程序运行平台，全球及国内排名前1000的90%以上的网站使用的主流系统都是Linux系统。
+                    所以从上面内容可以看出，Linux操作系统之所以如此流行，是因为它具备以下优秀的特点：
+                <ul>
+                    <li>
+                        <p>
+                            1） 免费且开源
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2） 完全兼容
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3） 多用户、多任务
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4） Linux让开展各种实际有用且具有创造性的事情成为可能。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5） Linux 的自生系统引导映像（live boot image），启动一台硬盘已经崩溃的计算机，之后查找并解决该问题。或者，因为 Linux
+                            是一个真正的多用户操作系统，它具有非常好的私密性和稳定性，整个团队可以同时从本地或远程登录进行工作。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            6） Linux 提供了复杂的软件包管理系统，可以放心地安装和维护每一个在线资源库中的软件应用。
+                        </p>
+                    </li>
+                </ul>
+
+                </p>
+            </span>
+            <span>
+                <h4 id="2.1.4">2.1.4 Linux系统版本介绍</h4>
+                <p>
+                    Linux操作系统有许多发行版本，很难说Linux版本中哪个更好，每个版本都有对应的特点。下面介绍一下常见的系统。
+                    1） Ubuntu（本章节系列后续课程会以Ubuntu镜像为例，进行讲解说明。）
+
+                    Ubuntu是一款基于Debian派生的操作系统，该操作系统成为市场上专有桌面操作系统有力的竞争者。对新款硬件具有极强的兼容能力。特点是界面非常友好，容易上手，对硬件支持非常全面，是最适合做桌面系统的Linux发行版本，同时Ubuntu也可用于服务器领域。
+
+                </p>
+                <p>
+                    <img src="img/two/2.jpg">
+
+                </p>
+                <p>
+                    Ubuntu的目标在于为一般用户提供一个最新的，同时又相对稳定的主要自由软件构建而成的操作系统。Ubuntu具有强大的社区力量，用户可以方便地从社区获取帮助。
+
+                </p>
+                <p>
+                    2） Debian
+
+                    1993年首次公布，该发行版本非常稳定，卓越的质量控制，包含超过30000个软件包，支持比任何其他Linux发行版本更多的处理器体系结构。
+
+                </p>
+                <p>
+
+                    <img src="img/two/3.jpg">
+                </p>
+                <p>
+                <p>
+                    3） RHEL红帽
+
+                </p>
+                </p>
+                <p>
+
+                    <img src="img/two/4.jpg">
+                </p>
+                <p>
+
+                    Redhat，应该称为Redhat系列，包括：
+
+                    RHEL （Redhat Enterprise Linux，也就是所谓的Redhat Advance Server，收费版本，稳定性非常好，适合服务器使用）
+                    Fedora Core （由原来的Redhat桌面版本发展而来，免费版本，稳定性较差，最好只用于桌面应用）
+                    CentOS （RHEL的社区克隆版本，免费版本，稳定性非常好，适合服务器使用）
+
+                </p>
+                <p>
+
+                    4） Fedora
+                    由全球社区爱好者构建的面向日常应用的快速且强大的操作系统。它允许任何人自由地使用、修改和重发布，无论现在还是将来。它由一个强大的社群开发，这个社群的成员以自己的不懈努力，提供并维护自由、开源代码的软件和开放的标准。Fedora
+                    项目由 Fedora 基金会管理和控制，得到了Red Hat 的支持。
+
+                </p>
+                <p>
+                    <img src="img/two/5.jpg">
+
+                </p>
+                <p>
+                    Fedora （第七版以前为Fedora Core）是一款基于 Linux 的操作系统，也是一组维持计算机正常运行的软件集合。其目标是创建一套新颖、多功能并且自由和开源的操作系统。
+                </p>
+                <p>
+                    5） OpenSUSE
+
+                    德国著名的Linux系统，全球范围内有着不错的声誉及市场占有率，发行量在欧洲占第一位。OpenSUSE对个人来说是完全免费的，包括使用和在线更新。
+
+                </p>
+                <p>
+
+                    <img src="img/two/6.jpg">
+                </p>
+                <p>
+                    OpenSUSE被评价为最华丽的Linux桌面发行版，甚至超越win7，但它的优势绝不仅仅局限于win7还要绚丽的用户交互界面，其性能也绝不亚于其他Linux桌面发行版！
+                </p>
+            </span>
+        </span>
+
+        <span 2.2>
+            <h3 id="2.2">2.2 Windows下的环境配置-虚拟机安装</h3>
+            <p>
+                <hr>
+                本节课程提供了两种虚拟机的安装方法，用户可根据实际需求选择安装VMware或
+
+                VirtualBox虚拟机。后续的课程以VMware虚拟机为例进行操作，它同样适用于VirtualBox。
+                <hr>
+            </p>
+            <span>
+                <h4 id="2.2.1">2.2.1 VMware虚拟机的安装</h4>
+            </span>
+            <span>
+                <h5 id="2.2.1.1">（1） 安装VMware</h5>
+                <p>
+                    简单来说，虚拟机是允许我们在操作系统中运行其它操作系统的软件。这里我们以
+
+                    VMware Workstation软件为例，安装的步骤如下所示：
+
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            1) 将“配置文件->VMware”路径下的虚拟机软件压缩包进行解压。
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/1.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 找到解压后的虚拟机文件夹，双击虚拟机可执行文件（后缀名为.exe）。
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/2.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 接着按照图示顺序完成虚拟机的安装。
+                        </p>
+                        <p>
+                        <p>
+                            <img src="img/two/2.2/3.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/4.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/5.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/6.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/7.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/8.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/9.jpg">
+                        </p>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 第一次启动虚拟机时，需要输入产品秘钥。此时，填入虚拟机文件夹“VMware16激活密钥”文件中的任意一个秘钥，点击“继续”即可。
+                        </p>
+                    </li>
+                </ul>
+            </span>
+            <span>
+                <h5 id="2.2.1.2">（2） 启动电脑本地的VMware相关服务</h5>
+                <p>
+                    <img src="img/two/2.2/10.jpg">
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            1） 切换至电脑本地，使用快捷键“WIN+R”打开运行窗口。随后，输入“control”，并按下回车，打开“控制面板”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/11.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2） 单击“管理工具”进入面板，双击“服务”选项。
+                        </p>
+                        <p>
+                        <p>
+                            <img src="img/two/2.2/12.jpg">
+                        </p>
+                        <p style="padding-right: 550px;">
+                            <img src="img/two/2.2/13.jpg">
+                        </p>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3） 到VMware相关服务，如下图所示：
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/14.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4） 右键点击“启动”按键，启动所有VMware相关服务。
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/15.jpg">
+                        </p>
+                    </li>
+                </ul>
+            </span>
+            <span>
+                <h4 id="2.2.2">2.2.2 VirtualBox安装</h4>
+                <ul>
+                    <li>
+                        <p>
+                            1) 打开同目录下的软件安装包，点击下一步。
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/16.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 自行修改需要安装的路径，然后点击下一步。
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/17.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 无需改动，直接下一步。
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/18.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 确定安装，点击开始安装。
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/19.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/20.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5) 安装结束，点击完成。
+                        </p>
+                        <p>
+                            <img src="img/two/2.2/21.jpg">
+                        </p>
+                    </li>
+                </ul>
+            </span>
+        </span>
+
+        <span 2.3>
+            <h3 id="2.3">2.3 Linux系统安装及换源方法</h3>
+            <p>
+                <hr>
+                用户可根据上一节课程所安装的虚拟机，选择对应的安装及配置方法。
+                <hr>
+            </p>
+            <span>
+                <h4 id="2.3.1">2.3.1 VMware虚拟机下系统的安装及配置</h4>
+            </span>
+            <span>
+                <h5 id="2.3.1.1">（1） 创建新的虚拟机</h5>
+                <ul>
+                    <li>
+                        <p>
+                            1) 将Ubuntu镜像压缩包进行解压。
+                        </p>
+
+                    </li>
+                    <li>
+                        <p>
+                            2) 进入虚拟机界面后，点击“创建新的虚拟机”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/1.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 在弹出的界面中选择“自定义”后，接着点击“下一步”，然后依次按图示设置即 可。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/2.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/3.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/4.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/5.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/6.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/7.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/8.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/9.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/10.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/11.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/12.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/13.jpg">
+                        </p>
+                        <p>
+                            温馨提示：这里建议最大磁盘大小调大一些，例如120G，以防后期开发学习空间紧张。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/14.jpg">
+                        </p>
+                        <p>
+                            注意：请确保放置在空间充足的磁盘中。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/15.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/16.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 配置完成后，界面如下图所示，然后会跳转进入简易安装模式，等待安装完成即可。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/17.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/19.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5) 安装完成将显示用户登陆的主界面，输入设置的密码即可进入系统桌面，然后按照后续图示依次点击完成。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/20.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/21.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/22.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/23.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/24.jpg">
+                        </p>
+                    </li>
+                </ul>
+            </span>
+            <span>
+                <h5 id="2.3.1.2">（2） 换源</h5>
+                <p>
+                    注意：本节步骤非常重要，请勿跳过！否则后续下载开发所需的一些安装包会因为网络问题出错！
+                    初学者可能不知道什么是源？其实它就像苹果和安卓的软件应用商店一样，为Linux用户提供软件下载及更新服务的。
+                    Ubuntu是国外开发的系统，默认的软件下载服务器是官方指定的，可能会造成下载文件比较慢或出错的情况。
+                    大家可将软件服务器切换到国内的源进行下载，为后边系统更换输入法等配置工作做准备。下面以更换阿里云源为例，进行说明。
+
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            1) 首先按照下图所示点击对应按钮，确认网络连接状态。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/25.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 点击下图所示位置，然后在输入栏输入设置“Settings”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/26.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 然后搜索软件和更新“Software & Updates”，并双击打开。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/27.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 打开以后，依次点击下载自->其他站点“Download from->Other”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/28.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/29.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5) 滑动找到阿里云“mirrors.aliyun.com”的服务器。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/30.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/31.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            6) 如果不确定要选择哪个服务器，也可以点击选择最佳服务器“Select Best
+                            Server”，会执行一系列的测试，系统进行匹配。但是注意有的时候匹配可能不那么准确。
+                        </p>
+                        <p>
+                            选择完成后，会提示认证，输入设定的密码即可。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/32.jpg">
+                        </p>
+                    </li>
+                </ul>
+            </span>
+            <span>
+                <h5 id="2.3.1.3">（3） 初次配置</h5>
+                <ul>
+                    <li>
+                        <p>
+                            1) 由于简易安装下默认为英文系统界面，我们需要更改系统语言及设置中文输入法。按照下方图示，点击系统左下角的按钮，在搜索栏输入“Language
+                            Support”，然后双击打开此按钮。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/33.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/34.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 打开后，会弹出下方图示界面，点击“Install”进行下载语言包。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/35.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 输入设置的密码。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/36.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 然后等待语言包安装完成即可。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/37.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5) 下载完成后，点击“Install/Remove language”按钮。添加“Chinese(simplified)”
+
+                            后，点击“Apply”即可。
+
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/38.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/39.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            6) 安装完成后回到下面的界面，把汉语从最后一位通过鼠标拖到第一个。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/40.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/41.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            7) 然后切换到“Regional Formats”，选择“汉语（中国）”，点击“Apply System-wide”，弹出密码确认的话就输入密码，授权就可以了。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/42.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            8) 然后再次输入密码。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/43.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            9) 按照下图所示进行重启。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/44.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/45.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            10) 重启后，可以看到界面已经中文成功设置，点击“更新名称”即可。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/46.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/47.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            11) 接下来我们进行中文输入法的设置，点击设置按钮，点击“区域和语言”，在展开的右侧界面内，找到“输入源”，点击下方的“+”按钮。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/48.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/49.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            12) 点击“汉语”，然后在展开的输入法中选择第一个，点击“添加”。（这里以第一种拼音为例进行添加，有五笔需求的用户可自行选择）
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/50.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/51.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            13) 添加完成后，界面的右上角将可看到添加结果。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/52.jpg">
+                        </p>
+                        <p>
+                            同Windows中英文切换快捷键不同的是，按“Win键+空格键”即可切换输入法。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            14) 最后我们来对系统日期和时间进行设置，同样还是打开设置，搜索“日期和时间”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/53.jpg">
+                        </p>
+
+                    </li>
+                    <li>
+                        <p>
+                            15) 关闭“自动设置日期和时间”，可以在下方“日期和时间”内进行设置。点击“时区”，选择“Shanghai,中国”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/54.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/55.jpg">
+                        </p>
+                    </li>
+                </ul>
+            </span>
+            <span>
+                <h5 id="2.3.1.4">（4） 修改分辨率</h5>
+                <p>
+                    如果需要修改显示的分辨率，我们可以通过设置来改变。
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            1) 点击下图所示位置，然后在输入栏输入“设置”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/56.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 然后双击打开图标，点击搜索按钮，输入“显示”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/57.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/58.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/59.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/60.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 根据个人需求选择显示的分辨率，然后按照后续提示操作即可完成更改。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/61.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 这里完成更改后，效果如下：
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/62.jpg">
+                        </p>
+                    </li>
+                </ul>
+            </span>
+            <span>
+                <h5 id="2.3.1.5">1.5 共享文件夹的实现</h5>
+                <p>
+                    在进行后续程序的开发中，我们经常需要在主机和虚拟机之间传递文件，比如说，源代码位于虚拟机，而在主机下阅读或修改源代码，这里就需要用到共享文件夹这个机制。
+                    由于本章教程是以Vmware虚拟机来进行的，所以我们就以其自带的功能进行说明。
+
+                </p>
+                <h6 id="2.3.1.5.1">1.5.1 创建并查看共享文件夹</h6>
+                <ul>
+                    <li>
+                        <p>
+                            1) 关闭Ubuntu系统，然后点击“虚拟机->设置”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/63.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 然后在弹出的界面中，依次点击“选项->共享文件夹->文件夹共享”，然后单击“总是启用”，再点击“添加”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/64.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 在弹出的界面中，点击“下一步”，然后点击“浏览”，根据需求选择盘符，自行创建一个文件夹。这里以创建名为“Share”为例进行：
+                        </p>
+                        <p>
+                            注意：创建的共享文件夹内，初次配置时必须为空，否则会配置失败。如有文件，可暂先移出备份。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/65.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/66.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/67.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/68.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 开启虚拟机，启动系统。如提示无法连接虚拟设备的弹窗提示，直接选“否”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/69.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5) 进入桌面后按下“Ctrl+Alt+T”打开命令行终端。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            6) 输入指令“sudo apt install open-vm-tools”，然后在弹出的选项中输入设置的密码。
+                        </p>
+                        <p>
+                            （指令输入可直接复制并粘贴到命令行终端。密码输入不显示，输入完成后按下回车即可）。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/70.jpg">
+                        </p>
+                        <p>
+                            注意：若在安装时出现如下所示提示内容。
+                        </p>
+                        <hr>
+                        <p>
+                            <img src="img/two/2.3/71.jpg">
+                        </p>
+                        <p>
+                            <b>
+                                可参照“第2课 Windows下的环境配置->2.启动电脑本地的VMware相关服务”文档内容，重新开启NAT服务，再输入指令“sudo apt install
+                                open-vm-tools”重新安装即可。
+                            </b>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            7) 确认一下前面虚拟机配置后，系统“/mnt”目录下是否生成了“hgfs”文件夹。输入指令“ls /mnt/”。
+                        </p>
+                        <p>
+                            <b>
+                                注意：若未有“hgfs”文件夹生成，如下图所示：
+                            </b>
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/72.jpg">
+                        </p>
+                        <p>
+                            <b>
+                                则需要手动创建，输入指令“sudo mkdir /mnt/hgfs”（同样指令输入可直接复制并粘贴到命令行终端。密码输入不显示，输入完成后按下回车即可）。
+                            </b>
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/73.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            8) 确定“/mnt”目录下有“hgfs”文件夹后，再进行是手动挂载，输入指令“sudo mount
+                            -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other”即可手动挂载。
+                        </p>
+                        <p>
+                            <b>
+                                注意：若手动挂载时出现如下所示提示，
+                            </b>
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/74.jpg">
+                        </p>
+                        <p>
+                            <b>
+                                输入“sudo mount -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other -o
+                                nonempty”重新挂载即可。
+                            </b>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+
+                        </p>
+                        <p>
+                            <hr>
+                            <b>
+                                注意：虚拟机这里的共享文件夹名称与主机环境下创建的文件夹名称必须一致。若不
+                                一致，请修改为统一名称！
+                            </b>
+                            <hr>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            10) 现在主机的共享文件夹位于E:\Share，那虚拟机的路径在**/mnt/hgfs/Share/**。可做个测试：在主机的共享文件夹内放入test.txt。
+                        </p>
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/75.jpg">
+                        </p>
+                        <p>
+                            在虚拟机下/mnt/hgfs/Share/下输入“ls”指令，可见到此文件说明配置完成。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/76.jpg">
+                        </p>
+                    </li>
+                </ul>
+
+                <h6 id="2.3.1.5.2">1.5.2 共享文件及常见问题解决</h6>
+                <p id="2.3.1.5.2.1">
+                    <b>
+                        1.5.2.1 文件无法共享
+                    </b>
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            1) 确认是否创建了hgfs共享目录，可参照“5.1创建并查看共享文件夹->7）”进行查看与手动创建共享目录。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 查看本地共享文件夹目录是否为空，若为空可参照“5.1创建并查看共享文件夹->2）
+                            -3）”进行新建共享文件夹。
+                        </p>
+
+                    </li>
+                    <li>
+                        <p>
+                            3) 再次配置虚拟机共享文件夹设置，可参照“5.1创建并查看共享文件夹->1）-2）”进行共享文件夹的设置。
+                        </p>
+                    </li>
+                    <p id="2.3.1.5.2.2">
+                        <b>
+                            1.5.2.2 重启虚拟机找不到共享文件夹
+                        </b>
+                    </p>
+                    <p>
+                        如果手动挂载以后，再次登陆开机发现找不到配置的共享文件夹，可通过自动挂载的形式来解决。自动挂载可通过vi编辑起来配置。vi编辑器是Linux操作系统中最经典的文本编辑器。由于Ubuntu系统中预装的是简易版的vi编辑器，为了更好的编辑文件，我们需要将它卸载并重新安装完整版的vi编辑器。
+                    </p>
+                    <li>
+                        <p>
+                            1) 打开命令行终端输入“sudo apt-get remove vim-common”将vi编辑器卸载。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/77.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 输入“sudo apt-get install vim”指令安装完整版vi编辑器。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/78.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 输入指令“sudo vi
+                            /etc/fstab”，通过vi编辑器打开这个配置文件，在弹出的选项中输入设置的密码。（指令输入可直接复制并粘贴到命令行终端。密码输入不显示，输入完成后按下回车即可）。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 复制“.host:/ /mnt/hgfs fuse.vmhgfs-fuse auto,allow_other 0 0”。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5) 返回vi编辑器，按下键盘“i”键，通过键盘“↑↓←→”按键，移动到文件内的末行。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/79.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            6) 按下回车，鼠标右键选择“粘贴”即可将前面复制的内容粘贴过来。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/80.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/81.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            7) 按下“Esc”，按下“：”，然后输入“wq”，回车退出并保存。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/82.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            8) 重新启动虚拟机再次按照5.1 创建并查看共享文件夹内容进行查看。
+                        </p>
+                        <hr>
+                        <p>
+                            关于指令和终端界面的详细介绍，可学习后面的课程。
+                        </p>
+                    </li>
+                </ul>
+            </span>
+            <span>
+                <h4 id="2.3.2">2.3.2 VirtualBox虚拟机下系统的安装及配置</h4>
+            </span>
+            <span>
+                <h5 id="2.3.2.1">（1） 新建虚拟机</h5>
+
+
+                <ul>
+                    <li>
+                        <p>
+                            1) 点击新建，然后自行按需设置名称和路径，类型固定为Linux，版本固定为Ubuntu64位。设置完成后，点击下一步。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/83.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 修改虚拟机内存大小，建议设置为2G。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/84.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 点击创建虚拟硬盘，硬盘文件类型默认VDI，默认动态分配方式，点击下一步。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/85.JPG">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/86.JPG">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/87.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 设置文件位置和硬盘的大小，硬盘大小建议为20G，最后点击创建。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/88.JPG">
+                        </p>
+                    </li>
+                </ul>
+            </span>
+            <span>
+                <h5>
+                    （2） 虚拟机配置
+                </h5>
+                <ul>
+                    <li>
+                        <p>
+                            1) 点击设置，打开全局设置界面。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/89.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 解压同目录下的Ubuntu镜像文件，然后依次点击存储->没有盘片->选择虚拟光盘文
+                            件。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/90.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 找到解压的Ubuntu文件路径，点击Ubuntu镜像，选择打开。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/91.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 点击OK，保存设置。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/92.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5) 点击管理，再点击全局设定。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/93.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            6) 点击显示，最大屏幕尺寸选择为“提示”，按需修改屏幕尺寸，最后点击OK保存。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/94.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            7) 再次点击全局设定，选择网络，再点击添加NAT网络，最后点击OK保存。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/95.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            8) 点击设置，进入虚拟机设置界面。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/96.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            9) 左侧点击网络，连接方式选择“NAT网络”，界面名称为全局设定中新添加的NAT网络，然后点击高级设定。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/97.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            10) 勾选接入网线，点击OK保存。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/98.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            11) 点击启动，打开虚拟机。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/99.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            12) 左侧设置安装语言，然后点击安装。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/100.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            13) 选择完安装选项后，等待安装完成。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/101.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            14) 安装完成将显示用户登陆的主界面，输入设置的密码即可进入系统桌面，然后
+                            按照后续图示依次点击完成。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/102.JPG">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/103.JPG">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/104.JPG">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/105.JPG">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/106.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            15) 虚拟机关闭后，再次启动前，需要修改启动顺序，否则会重新安装系统。点击设置，进入设置界面。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/107.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            16) 左侧点击系统，将启动顺序中除了硬盘的选项都取消勾选，然后将硬盘选项上升到顶部，最后点击OK保存。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/108.JPG">
+                        </p>
+                    </li>
+                </ul>
+            </span>
+            <span>
+                <h5>
+                    （3） 设置共享文件夹
+                </h5>
+                <ul>
+                    <li>
+                        <p>
+                            1) 点击设置，进入虚拟机设置界面。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/109.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2)
+                            左侧点击共享文件夹，再点击加号添加共享文件夹，设置共享文件夹路径和名称，接着勾选自动挂载，输入挂载点“/mnt/share/”，然后点击OK保存，再点击OK退出设置。
+                        </p>
+                        <p>
+                            <hr>
+                            注意：共享文件夹所在路径，设置前文件内容需为空，否则会设置失败。
+                            <hr>
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/110.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 点击启动，开启虚拟机。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/111.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 点击设备，再点击安装增强功能。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/112.JPG">
+                        <p>
+                            如果出现以下错误提示，回到桌面，右键光盘，选择弹出，再次点击安装即可。
+                        </p>
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/113.JPG">
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/114.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5) 点击安装后，选择运行该软件。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/115.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            6) 输入密码，点击认证。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/116.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            7) 出现如下提示，就已安装完成，按下回车退出即可。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/117.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            8) 右键桌面，选择打开命令行终端。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/118.JPG">
+                        </p>
+                        <p>
+                            <hr>
+                            注意：输入指令时需要严格区分大小写，且可使用“Tab”键补齐关键词。
+                            <hr>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            9) 输入指令“sudo mkdir /mnt/share”，创建共享文件夹。
+                            <br>执行需要输入密码，密码不显示，输完按下回传即可。
+                        </p>
+
+                    </li>
+                    <li>
+                        <p>
+                            10) 输入指令“sudo mount -t vboxsf share
+                            /mnt/share”，搭载共享文件夹，其中第一个“share”是主机下的共享文件夹路径，根据实际情况修改。
+                        </p>
+
+                    </li>
+                    <li>
+                        <p>
+                            11) 搭载完成后， 需要修改权限才能访问， 输入指令“ sudo usermod -aG vboxsf
+                            $(whoami)”，添加权限，最后重启虚拟机即可。
+                        </p>
+
+                    </li>
+                    <li>
+                        <p>
+                            12) 现在共享文件夹已设置完毕，添加文件测试效果，在主机共享文件夹放入测试文件。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/119.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            13) 在虚拟机打开命令行终端，输入指令“cd /mnt/share”，进入共享文件夹。
+                        </p>
+
+                    </li>
+                    <li>
+                        <p>
+                            14) 输入指令“ls”，查看该目录所有文件，文件一致，完成共享。
+                        </p>
+                        <p>
+                            <img src="img/two/2.3/120.JPG">
+                        </p>
+                    </li>
+                </ul>
+            </span>
+        </span>
+
+
+        <span 2.4>
+            <h3 id="2.4">2.4 Linux的基本操作</h3>
+            <span>
+                <h4 id="2.4.1">2.4.1 图形界面介绍</h4>
+                <p>
+                    本节以Ubuntu系统的GUI为例进行说明，Linux其他版本可自行网搜。
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            1) 图形系统进入后，左侧黄框内为菜单栏，右侧为桌面，顶端黄框内为状态栏，菜单栏最下方为工具栏。
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/2.png">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 菜单栏自上到下为简易安装后的基本工具，比如浏览器、邮件、办公Office，可以满足基本的使用需求。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 点击菜单栏最下方的“工具栏”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/3.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 在工具栏内，我们可以选择各种工具，黄框内为搜索栏，输入工具名称既可查找到对应的工具。
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/4.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5) 点击状态栏的最右方。
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/5.png">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            6) 点击以后出现下图:
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/5.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            7) 点击“设置”按钮。
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/6.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            8) 在下图界面即可对Ubuntu系统进行设置。
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/7.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            9) 单击系统桌面右上角的电源按钮，然后如下图所示进行操作：
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/8.JPG" style="width: 400px;">
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/9.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            10) 按下键盘上的“win”键，并将鼠标移动到最右侧。
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/10.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            11) 鼠标点击下图黄框所示位置
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/11.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            12) 即可切换成新的桌面。 </p>
+                        <p>
+                            <img src="img/two/2.4/12.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            13) 点击右侧文件夹按钮，可打开文件管理器。如下图所示： </p>
+                        <p>
+                            <img src="img/two/2.4/13.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            14) 右键红框内的空白区域。 </p>
+                        <p>
+                            <img src="img/two/2.4/14.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            15) 点击“新建文件夹”。 </p>
+                        <p>
+                            <img src="img/two/2.4/15.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            16) 在红框内输入文件夹的名称，这里我们以“test”为例，输入完毕，点击右上角的 “创建”。 </p>
+                        <p>
+                            <img src="img/two/2.4/16.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            17) 成功新建文件夹后，新文件夹如下图所示： </p>
+                        <p>
+                            <img src="img/two/2.4/17.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            18) 右键“test”文件夹，点击“复制”。 </p>
+                        <p>
+                            <img src="img/two/2.4/18.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            19) 点击“桌面”。 </p>
+                        <p>
+                            <img src="img/two/2.4/19.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            20) 右键空白区域，弹出红框内容，点击“粘贴”。 </p>
+                        <p>
+                            <img src="img/two/2.4/20.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            21) 若“桌面”出现“test”文件夹，则复制成功。 </p>
+                        <p>
+                            <img src="img/two/2.4/21.JPG">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            22) 右键桌面的“test”文件夹，点击“移动到回收站”，删除文件夹。其他文件操作均与windows系统相同。 </p>
+                        <p>
+                            <img src="img/two/2.4/22.JPG">
+                        </p>
+                    </li>
+
+                </ul>
+            </span>
+            <span>
+                <h4 id="2.4.1">2.4.1 图形界面介绍</h4>
+                <p>
+                    下面介绍终端，终端是Linux系统的控制台，我们依靠各种命令与内核打交道来完成我们日常的任务。
+                </p>
+
+                <p>
+                    终端从用户接收键盘输入，并将输入发送给主机系统，主机系统处理用户输入后将结果返回至终端。
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            1) 打开终端的方式也很简单，按下键盘“Ctrl+Alt+T”或点击左下角“显示应用程序”，
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/23.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            1) 打开终端的方式也很简单，按下键盘“Ctrl+Alt+T”或点击左下角“显示应用程序”，再点击“终端”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/23.jpg">
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/24.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 点击“编辑”，选择“首选项”，我们即可在右边黄框内，对命令栏的样式、字体等根据自己的喜好进行更改。
+                        </p>
+                        <p>
+                            <img src="img/two/2.4/25.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 当我们打开终端界面后，我们看到的格式是类似[emboard@ubuntu~]#这种格式的一串字符，这串字符就是命令提示符。
+                        </p>
+                        <p>
+                            其中，emboard：当前用户的名称。
+                        </p>
+                    <li>
+                        <p>
+                            ① &nbsp; @：分隔符。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            ② &nbsp; Ubuntu：当前的主机名。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            ③ &nbsp; ~：用户当前所在目录的名称，“~”为主目录，即home目录。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            ④ &nbsp; #：用户身份提示符，#代表超级用户，也就是管理员；$表示普通用户。
+                        </p>
+                    </li>
+
+                    </li>
+
+                </ul>
+            </span>
+        </span>
+
+
+        <span 2.5>
+            <h3 id="2.5">2.5 Linux目录介绍</h3>
+            <p>
+                系统目录就是指操作系统的主要文件存放的目录，目录中的文件直接影响到系统是否正常工作，了解这些目录的功能，对使用系统会有很大的帮助。
+            </p>
+            <span>
+                <h4 id="2.5.1">1.打开系统目录</h4>
+            </span>
+            <p>
+                在虚拟机中，依次输入两次命令“cd ..”和一次命令”ls”（注意：cd 和..中间有一个空格），然后分别按键盘上的回车键。
+            </p>
+            <p>
+                <img src="img/two/2.5/1.png">
+            </p>
+            <p>
+                在 Linux 中系统目录指的是下图所示方框范围的文件夹。Linux 的操作系统完全基于文件和文件系统建立，任何信息都以文件的形式存储，通过文件名和路径定义。
+            </p>
+            <p>
+                在Linux系统中目录结构是一种树形结构，“/”标识代表了这个树形结构的根部，也就是人们常说的根目录。
+            </p>
+            <p>
+                <img src="img/two/2.5/2.png">
+            </p>
+
+            <span>
+                <h4 id="2.5.2">2.查看系统目录</h4>
+            </span>
+            <p>
+                我们可以命令的形式在Linux上查看系统目录，为了更加直观的展现及帮助用户理解，可使用树状分布图的形式来操作，操作步骤如下：
+            </p>
+            <p>
+                输入下图所示命令：“sudo apt-get install tree”，安装软件包。
+            </p>
+            <p>
+                <img src="img/two/2.5/3.png">
+            </p>
+            <hr>
+            <p>
+                注意：若出现安装失败的情况，如下图所示（无法找到安装包）：
+            </p>
+            <p>
+                <img src="img/two/2.5/4.png">
+            </p>
+            <p>
+                我们需要输入“sudo apt-get update”指令，更新源。
+            </p>
+            <p>
+                <img src="img/two/2.5/5.png">
+            </p>
+            <p>
+                更新完成后输入“sudo apt-get install tree”指令重新安装即可。
+            </p>
+            <hr>
+            <p>
+                安装完成后，就可以使用 tree 的相关命令，可按照如下示例命令进行尝试：
+            </p>
+            <p>
+                tree：以树状图显示所有文件。
+            </p>
+            <p>
+                tree -L N：以树状图显示所有文件夹，子文件夹显示至第 N 层。（“tree”和“-”之间，“L”和“N”之间各有一个空格；N 需用数字代替，表示文件夹层数。）
+            </p>
+            <p>
+                1） 输入“tree -L 1”命令，显示子文件夹至第 1 层，如下图所示。Windows 系统同样采用了树状结构，但是它是以磁盘为根分区，形成的 C 盘、D 盘等相当于子文件夹的第一层。
+            </p>
+            <p>
+                对于 Linux 系统而言，“/”相当于一块完整的硬盘，我们把这个硬盘划分为“/etc”，
+                “/dev”，“/lib” 等多个分区。
+            </p>
+            <p>
+                <img src="img/two/2.5/6.png">
+            </p>
+            <p>
+                下表记录了各个主要目录的功能：
+            </p>
+            <table cellspacing="5" cellpadding="10">
+                <tr>
+                    <th>目录名称</th>
+                    <th>对应功能</th>
+                </tr>
+                <tr>
+                    <td>bin</td>
+                    <td>存放Linux的常用命令。</td>
+                </tr>
+                <tr>
+                    <td>boot</td>
+                    <td>存放Linux的启动文件</td>
+                </tr>
+                <tr>
+                    <td>dev</td>
+                    <td>存放Linux的外部设备。</td>
+                </tr>
+                <tr>
+                    <td>etc</td>
+                    <td>存放所有系统管理需要的各种配置文件和子目录。</td>
+                </tr>
+                <tr>
+                    <td>home</td>
+                    <td>存放主目录。</td>
+                </tr>
+                <tr>
+                    <td>lib</td>
+                    <td>存放动态链接共享库。</td>
+                </tr>
+                <tr>
+                    <td>media</td>
+                    <td>提供所有可移动设备的常规挂载点。</td>
+                </tr>
+                <tr>
+                    <td>mnt</td>
+                    <td>临时文件挂载点。</td>
+                </tr>
+                <tr>
+                    <td>proc</td>
+                    <td>存放有关系统资源的信息。</td>
+                </tr>
+                <tr>
+                    <td>root</td>
+                    <td>表示根用户的主目录。</td>
+                </tr>
+                <tr>
+                    <td>sbin</td>
+                    <td>存放系统中非必备和并不特别重要的系统二进制文件及网络应用工具。</td>
+                </tr>
+                <tr>
+                    <td>sys</td>
+                    <td>存放内核、固件及系统相关文件。</td>
+                </tr>
+                <tr>
+                    <td>tmp</td>
+                    <td>存放临时文件。</td>
+                </tr>
+                <tr>
+                    <td>usr</td>
+                    <td>存放用户文档、游戏、图形文件、库以及各种其他用户和管理命令及文件。</td>
+                </tr>
+                <tr>
+                    <td>var</td>
+                    <td>存放的是不断扩充且经常修改的目录。</td>
+                </tr>
+            </table>
+        </span>
+
+        <span 2.6>
+            <h3 id="2.6">2.6 Linux常见指令</h3>
+            <p>
+                通过前面的学习，我们已经掌握了一些基本的Linux指令。对于Linux新手来说，记忆数量巨大的Linux指令是学习的一大难点。不过无需担心，实际上我们只要掌握常见的十余种指令就可以上手Linux了。
+            </p>
+            <p>
+                下表为Linux常用的一些指令。
+            </p>
+
+            <table cellspacing="5" cellpadding="10">
+                <tr>
+                    <th>指令名</th>
+                    <th>英文全称/翻译</th>
+                    <th>意义</th>
+                </tr>
+                <tr>
+                    <td>Ls</td>
+                    <td>List/列出</td>
+                    <td>列出当前目录下的文件</td>
+                </tr>
+                <tr>
+                    <td>cd</td>
+                    <td>Change Directory/更改目录</td>
+                    <td>切换路径</td>
+                </tr>
+                <tr>
+                    <td>pwd</td>
+                    <td>Print Working Directory/显示工作目录</td>
+                    <td>显示所在目录</td>
+                </tr>
+                <tr>
+                    <td>ping</td>
+                    <td>Packet Internet Groper/因特网包探索器</td>
+                    <td>测试网络连接</td>
+                </tr>
+                <tr>
+                    <td>shutdown</td>
+                    <td>Shut down/关掉</td>
+                    <td>用于关机</td>
+                </tr>
+                <tr>
+                    <td>reboot</td>
+                    <td>Reboot/重启</td>
+                    <td>用于重启</td>
+                </tr>
+                <tr>
+                    <td>cp</td>
+                    <td>Copy/复制</td>
+                    <td>用于复制</td>
+                </tr>
+                <tr>
+                    <td>rm</td>
+                    <td>Remove/去掉</td>
+                    <td>删除</td>
+                </tr>
+                <tr>
+                    <td>mkdir</td>
+                    <td>Make directory/创建文件夹</td>
+                    <td>创建文件夹</td>
+                </tr>
+                <tr>
+                    <td>man command</td>
+                    <td>Manual/手册</td>
+                    <td>显示command的帮助信息</td>
+                </tr>
+                <tr>
+                    <td>echo</td>
+                    <td>Echo/回显</td>
+                    <td>将输入的内容回显到终端界面上</td>
+                </tr>
+                <tr>
+                    <td>sudo</td>
+                    <td>Superuser do/超级用户进行</td>
+                    <td>以系统管理员身份执行指令</td>
+                </tr>
+                <tr>
+                    <td>clear</td>
+                    <td>Clear/清除</td>
+                    <td>清除终端上的信息</td>
+                </tr>
+                <tr>
+                    <td>Find</td>
+                    <td>Find/查找</td>
+                    <td>查找功能</td>
+                </tr>
+                <tr>
+                    <td>mv</td>
+                    <td>Move/移动</td>
+                    <td>通过移动文件来实现重命名</td>
+                </tr>
+                <tr>
+                    <td>date</td>
+                    <td>Date/日期</td>
+                    <td>读取系统的日期/时间</td>
+                </tr>
+            </table>
+            <p>
+                我们可以看到，这些指令基本是基于英文单词全称或简称组成的，如果你有一些英文基础，相信指令记起来会更加容易。另外需要说明一点，在Linux内是是严格区分大小写的，包括指令中大写和小写也是不同的。
+            </p>
+            <span>
+                <h4 id="2.6.1">1.Linux指令格式</h4>
+                <p>
+                    指令+选项+操作对象这三部分构成了一个标准的Linux命令，其中命令部分需要输入命令的名称，选项部分定义命令的执行特性，这一特性可以有长短两个选项。
+                </p>
+                <p>
+                    比如像长选项用“ --”引导，后面跟一个完整的单词，如--help；短选项用‘-’引导，后面跟单个的字符， 如 -a 。多个短选项可以组合使用，例如：-h -l -a ==
+                    -hla，但是长选项不能组合使用，如--help后面就不能再跟另外一个单词了。例如下图所示：
+                </p>
+                <p>
+                    <img src="img/two/2.6/image187.png">
+                </p>
+            </span>
+            <span>
+                <h4 id="2.6.2">2.Linux指令的实操</h4>
+                <ul>
+                    <li>
+                        <p>
+                            1） 启动虚拟机，使用快捷键“Ctrl+Alt+T”或者右键桌面选择黄框内的选项，进入终端界面。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image188.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2） 输入第一个指令“pwd”。我们知道“pwd”指令是用于显示所在目录，可以看到当前是处在/home目录下/emboard的文件夹内。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image189.png">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3） 紧接着输入指令“ls”。“ls”指令是让系统列出当前所在目录的文件信息，可使用 “ls -l”和“ls -a”这样的参数获取文件权限、修改日期等信息。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image190.png">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4）
+                            接下来因示例需要，顺便介绍一些实用技巧。点击键盘“PrtSC或PRTSCR”按键，将会自动对当前画面进行截屏，截屏的图片会存放在/home/Pictures下，截取完毕，单击左上
+                            角的“文件管理器”图标为 <img src="img/two/2.6/image191.jpg"
+                                style="display: inline; width: 48px;"> 即可找到。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image192.jpg">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5） 回到终端界面，使用“cd”指令跳转。前面我们已经列出所在目录的文件信息，接下来使用指令跳转到玩法所在“/Pictures”文件夹内。
+                        </p>
+                        <p>
+                            Tips：在Linux系统中，可以使用“Tab”键来辅助指令输入。“Tab”键可以自动补全指令或文件（目录）名或文件（目录）路径。
+                        </p>
+                        <p>
+                            例如，当我们想要“/Pictures”目录时，输入指令“cd Pict”，然后在键盘上按一下“Tab”键，指令会被自动补齐为“cd
+                            Pictures/”。每次按下“Tab”键后，若无相重合的字符，完整的文件名会立刻出现在指令行；若有名称字符重合，则会出现当前目录下所有以这几个字符开头的文件名称。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image193.png">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            6） 现在已经进入截屏所在的目录，可再次使用指令“ls”查看该目录下有哪些文件。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image194.png">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            7） 这些文件中以“2019-08-28”开头，“.png”结尾的文件就是我们刚才的截图文件。在以后的项目管理中，大家可以通过该方法来直接查找所需的项目或者文件。
+                        </p>
+                    </li>
+                </ul>
+            </span>
+
+            <span>
+                <h4 id="2.6.3">3.高效的输入指令建议</h4>
+            </span>
+            <span>
+                <h5 id="2.6.3.1">
+                    3.1 通过help
+                </h5>
+                <ul>
+                    <li>
+                        <p>
+                            1) 在终端中以“‘命令’ --help”格式，可以帮助你查看某个命令的详细用法，我们
+                            以“ls”为例。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 在终端输入“ls --help”，黄框内是“ls”的更多用法。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image195.png">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 例如：在终端输入“ls -a”，即可看到文件夹内所有文件。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image196.png">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 例如：在终端输入“ls -al”，即可看到文件夹内，所有文件的属性。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image197.png">
+                        </p>
+                    </li>
+                </ul>
+                <h5 id="2.6.3.2">
+                    3.2 man手册介绍
+                </h5>
+                <p>
+                    接下来输入“man”指令。“man”指令是帮助手册manuel的缩写。当你忘记某一指令的时候或查看某指令的参数时，只要输入“man”指令，然后根据提示输入想要查找的东西，就得到详细的答案
+                </p>
+                <p>
+                    <img src="img/two/2.6/image198.png">
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            1) 可以通过快捷键进行翻页操作，下表为页面操作快捷键。
+                        </p>
+                        <p>
+                        <table>
+                            <tr>
+                                <th>功能</th>
+                                <th>快捷键</th>
+                            </tr>
+                            <tr>
+                                <td>往后翻一屏</td>
+                                <td>SPACE（空格）</td>
+                            </tr>
+                            <tr>
+                                <td>往前翻一屏</td>
+                                <td>B</td>
+                            </tr>
+                            <tr>
+                                <td>往后翻一行</td>
+                                <td>ENTER（回车）</td>
+                            </tr>
+                            <tr>
+                                <td>往前翻一行</td>
+                                <td>K</td>
+                            </tr>
+                            <tr>
+                                <td>返回终端</td>
+                                <td>:Q（先输入“:”号，再输入“Q”）</td>
+                            </tr>
+                        </table>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 除了上述的指令和按键以外，在Linux系统内还有一些特殊控制按键。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                        <table>
+                            <tr>
+                                <th>功能</th>
+                                <th>快捷键</th>
+                            </tr>
+                            <tr>
+                                <td>↑</td>
+                                <td>指令历史</td>
+                            </tr>
+                            <tr>
+                                <td>Tab</td>
+                                <td>自动补全</td>
+                            </tr>
+                            <tr>
+                                <td>Ctrl+C</td>
+                                <td>中断运行程序</td>
+                            </tr>
+                            <tr>
+                                <td>Ctrl+D</td>
+                                <td>退出终端界面</td>
+                            </tr>
+                            <tr>
+                                <td>Ctrl+A</td>
+                                <td>光标移动到本行开头</td>
+                            </tr>
+                            <tr>
+                                <td>Ctrl+X</td>
+                                <td>光标移动到本行结尾</td>
+                            </tr>
+                        </table>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 比如要查询“cp”指令的意义，可以输入“man cp”指令，回车后可以看到下图所示内容。如图中红框处标注出来的内容就是“cp”指令的含义：复制文件和文件夹。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image199.png" alt="">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 接着往下翻，会有一个“DESCRPTION”，下面的内容是关于“cp”这个指令的详细说明。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image200.png" alt="">
+                        </p>
+                    </li>
+                </ul>
+                <h5 id="2.6.3.3">
+                    3.3 使用tab键补齐
+                </h5>
+                <ul>
+                    <li>
+                        <p>
+                            1) 例如在终端输入“re”，并且按下“Tab”键。终端弹出带有“re”的命令供我们选择。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image201.png" alt="">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 在终端输入“cd D”，按下“Tab”键，将弹出该路径下所有名称含“D”的文件供我们选择。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/two/2.6/image202.png" alt="">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 在终端根据提示输入文件时，按下“Tab”键，可以将文件名称自动补全。
+                        </p>
+                    </li>
+                </ul>
+            </span>
+        </span>
+
+
+        <span 2.7>
+            <h3 id="2.7">2.7 Linux权限介绍</h3>
+            <p>
+                权限在生活中无处不在，例如游戏中会有防沉迷，电影平台非VIP用户无法观看VIP视频等，同样在操作系统中也不例外，访问文件需要权限，进入目录需要权限，更改文件需要权限。
+            </p>
+            <p>
+                在Linux系统中，不同的用户对应不同的权限，分为超级（root）用户和普通用户。超级用户即在Linux系统内可以做任何事情，几乎不受限制，而普通用户则只能去做权限内的事。
+            </p>
+            <p>
+                比如同样一个文件，超级用户可以对其进行编辑，而普通用户只能阅读，不能对其操作。
+            </p>
+            <span>
+                <h4 id="2.7.1">1.用户切换</h4>
+                <p>
+                    用户切换的指令很简单，但由于Ubuntu默认的root密码在每次重启后都是随机生成的，所以我们需要先设置root固定密码。
+                </p>
+                <p>
+                    打开命令行终端界面，输入指令<b>“sudo passwd”</b>，输入登陆密码后按下回车，随后设置root密码，需要连续两次。（注意：输入密码界面不会显示，输入完成后按下回车即可）
+                </p>
+                <p>
+                    <img src="img/two/2.7/image203.png" alt="">
+                </p>
+                <p>
+                    <img src="img/two/2.7/image204.png" style="width: 500px;">
+                </p>
+                <p>
+                    root密码设置完成后，接下来输入“su”，在提示的界面内，输入刚才设置的密码，回车，命令行之后的$变成了#这样就切换回root目录。
+                </p>
+                <p>
+                    <img src="img/two/2.7/image205.png" style="width: 500px;">
+                </p>
+            </span>
+            <span>
+                <h4 id="2.7.2">2.文件权限说明</h4>
+                <p>
+                    文件本身具有天然的权限属性，读、写、执行。
+                </p>
+                <p>
+                    文件按访问者可分为三类：
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            ① 拥有者：文件的拥有者user
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            ② 所属组：文件所属的群组group
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            ③ 其他用户：other
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    这里的拥有者、所属组，其他用户是一种角色，而root用户、普通用户则是具体的人，就像程序员是一种角色而我们是具体的人。
+                </p>
+                <p>
+                    对于每个身份，又有三种权限:<br>
+                    &nbsp;&nbsp; r：读权限（read）<br>
+                    &nbsp;&nbsp; 对于文件来讲就是可以读取其内容的权限，对于目录来讲无法查看目录里面的内容。<br>
+                    &nbsp;&nbsp; w：写权限（write）<br>
+                    &nbsp;&nbsp; 写权限：对于文件来讲就是可以向文件写数据，对于目录来讲无法删除目录里面的文件<br>
+                    &nbsp;&nbsp; x：可执行权限（execute）<br>
+                    &nbsp;&nbsp; 对于可执行文件来讲无法运行（可以看到颜色都变了），对于目录来讲无法进入目录。
+                </p>
+                <table>
+                    <tr>
+                        <th>Linux表示</th>
+                        <th>八进制表示</th>
+                        <th>解释说明</th>
+                    </tr>
+                    <tr>
+                        <td>r--</td>
+                        <td>4</td>
+                        <td>只读权限</td>
+                    </tr>
+                    <tr>
+                        <td>-w-</td>
+                        <td>2</td>
+                        <td>只写权限</td>
+                    </tr>
+                    <tr>
+                        <td>--x</td>
+                        <td>1</td>
+                        <td>可执行权限</td>
+                    </tr>
+                    <tr>
+                        <td>r-x</td>
+                        <td>5</td>
+                        <td>可读可执行权限</td>
+                    </tr>
+                    <tr>
+                        <td>rw-</td>
+                        <td>6</td>
+                        <td>可读可写权限</td>
+                    </tr>
+                    <tr>
+                        <td>-wx</td>
+                        <td>3</td>
+                        <td>可写可执行权限</td>
+                    </tr>
+                    <tr>
+                        <td>rwx</td>
+                        <td>7</td>
+                        <td>可读可写可执行权限</td>
+                    </tr>
+                </table>
+            </span>
+            <span>
+                <h4 id="2.7.3">3.权限更改说明</h4>
+                <p>
+                    权限更改将用到chmod指令，可以分为两种方法，第一种是通过数字形式改变权限，第二种是字符形式改变。
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            1) 打开终端界面，首先输入指令“touch test.txt”，创建一个txt文件。
+                        </p>
+
+                        <p>
+                            <img src="img/two/2.7/image206.png" alt="">
+                        </p>
+
+                        <p>
+                            <img src="img/two/2.7/image207.png" alt="">
+                        </p>
+                        <p>
+                            如上图所框，也就是文件拥有者拥有读和写的权限，所属群组及其它用户只有读的权限。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            2) 那比如说我们将此文件权限修改一下，所属群组和其它用户都有读写执行的权限。
+                            输入指令“chmod 777 test.txt”。
+                        </p>
+
+                        <p>
+                            <img src="img/two/2.7/image208.png" alt="">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            3) 再次输入“ls -al”，查看权限，可以看到已修改成功。
+                        </p>
+
+
+                        <p>
+                            <img src="img/two/2.7/image209.png" alt="">
+                        </p>
+                        <p>
+                            这种数字形式一次可以改变文件三种身份的所有权限，接下来我们来说第二种方式，以字符形式改变文件权限。
+                        </p>
+                        <p>
+                            字符形式更加灵活，可以给某个身份的某个权限单独设置。例如我们再次创建一个记事本文件，命名为“test_1”，输入指令“touch test_1.txt”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.7/image210.png" alt="">
+
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            4) 再次输入指令“ls -al”查看文件权限。
+                        </p>
+
+
+                        <p>
+                            <img src="img/two/2.7/image211.png" alt="">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            5) 这里我们举例分别给拥有者、群组及其他用户赋予执行的权限。<br>
+
+                        </p>
+                        <p>
+                            指令依次如下：
+                        </p>
+                        <p style="width: 700px;border: 2px black solid; text-indent: 0;">
+                            &nbsp;&nbsp; chmod u+x test_1.txt <br>
+                            &nbsp;&nbsp; chmod g+x test_1.txt <br>
+                            &nbsp;&nbsp; chmod o+x test_1.txt
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            6) 同理，如果需要设置读及写的权限，将x（执行）换成r（读）或w（写）
+                        </p>
+
+                        <p>
+                            <img src="img/two/2.7/image212.png" alt="">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            7) 设置完成后，我们再次查看一下文件的属性，输入“ls -al”指令。
+                        </p>
+                        <p>
+                            <img src="img/two/2.7/image213.png" alt="">
+                        </p>
+                    </li>
+
+
+
+                    <li>
+                        <p>
+                            8) 如果不想分开设置，通过字符的方式，例如我们将三种身份都增加写的权限，可以输入指令“chmod a+w test_1.txt”。其中a表示所有身份。
+                        </p>
+                        <p>
+                            <img src="img/two/2.7/image214.png" alt="">
+                        </p>
+                    </li>
+
+
+
+                    <li>
+                        <p>
+                            9) 然后输入“ls -al”指令来查看效果。
+                        </p>
+                        <p>
+                            <img src="img/two/2.7/image215.png" alt="">
+                        </p>
+                        <p>
+                            如果需要去掉某个身份的某种权限，只需将“+”换为“-”即可。例如去除其他用户执行的权限。
+                        </p>
+                    </li>
+
+
+
+
+
+
+
+                    <li>
+                        <p>
+                            10) 输入指令“chmod o-x test_1.txt”。
+                        </p>
+                        <p>
+                            <img src="img/two/2.7/image216.png" alt="">
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            11) 然后输入“ls -al”指令来查看效果。
+                        </p>
+                        <p>
+                            <img src="img/two/2.7/image217.png" alt="">
+                        </p>
+                    </li>
+                </ul>
+            </span>
+        </span>
+
+
+        <span class="blank"></span>
+    </div>
+        `
+                , sidebar: `
+                Linux系统简介,
+                Windows下的环境配置-虚拟机安装,
+                Linux系统安装及换源方法,
+                Linux的基本操作,
+                Linux目录介绍,
+                Linux常见指令,
+                Linux权限介绍
+                `
+            }
+            // 可添加更多章节
+        ];
+
+        // 获取页面元素
+        const sidebarList = document.getElementById('sidebarList');
+        const sectionContainer = document.getElementById('sectionContainer');
+
+        // 动态填充侧边栏章节列表
+        chapters.forEach((chapter, index) => {
+            const listItem = document.createElement('li');
+            const anchor = document.createElement('a');
+            anchor.href = `#${chapter.title.replace(/\s/g, '')}`; // 设置 href 属性
+            anchor.textContent = chapter.title; // 设置显示文本
+            anchor.addEventListener('click', (event) => {
+                event.preventDefault(); // 阻止默认跳转行为
+                showChapter(index); // 调用 showChapter 函数显示对应章节内容
+            });
+            listItem.appendChild(anchor); // 将 <a> 标签添加到 <li> 中
+            sidebarList.appendChild(listItem); // 将 <li> 添加到侧边栏列表中
+        });
+
+        // 初始化显示第一个章节内容
+        showChapter(0);
+
+        // 显示选定章节的内容
+        function showChapter(index) {
+            sectionContainer.innerHTML = chapters[index].content;
+            addInternalLinksSupport(); // 添加内部跳转支持
+
+            // 恢复页面滚动到顶部
+            window.scrollTo(0, 0);
+        }
+
+        // 添加内容区域的内部跳转支持
+        function addInternalLinksSupport() {
+            // 获取所有需要跳转的链接
+            const internalLinks = sectionContainer.querySelectorAll('a[href^="#"]');
+
+            internalLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // 阻止默认跳转行为
+
+                    // 获取目标锚点的ID
+                    const targetId = link.getAttribute('href').substring(1);
+
+                    // 滚动到目标锚点位置
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        };
+
+
+
+        chapters.forEach((chapter, index) => {
+            const sidebarStr = chapter.sidebar;
+            const itemList = sidebarStr.split(',');
+
+            itemList.forEach(item => {
+                const listItem = document.createElement('li');
+                const anchor = document.createElement('a');
+                anchor.classList.add('document-toc-link');
+                anchor.textContent = item.trim();
+                anchor.href = `#${item.trim().replace(/\s/g, '')}`; // 设置锚点链接
+
+                anchor.addEventListener('click', (event) => {
+                    event.preventDefault();
+
+                    // 获取章节内容部分的位置
+                    const chapterContent = document.getElementById(item.trim().replace(/\s/g, ''));
+
+                    // 检查是否找到了对应的章节内容部分
+                    if (chapterContent) {
+                        // 使用 scrollIntoView 方法平滑滚动到对应章节内容的位置
+                        chapterContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        console.warn(`未找到 ID 为 ${item.trim().replace(/\s/g, '')} 的章节内容部分`);
+                    }
+                });
+
+                listItem.appendChild(anchor);
+                sidebarRight.appendChild(listItem);
+
+            });
+
+            // 等待页面加载完成后执行
+            document.addEventListener('DOMContentLoaded', () => {
+                sidebar.forEach(container => {
+                    addInternalLinksSupport(container);
+                });
+
+            });
+
+
+        });
+
+
+
+    </script>
+</body>
+
+</html>
