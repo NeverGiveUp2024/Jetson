@@ -1,0 +1,297 @@
+/* 通过使用这些自定义属性，
+可以确保网站或应用程序中的颜色一致性，
+并且在需要时可以方便地进行调整和修改，
+提高了代码的可维护性和灵活性 */
+:root {
+    /* 1、颜色相关属性 */
+    /*通常是网站或应用程序的主要颜色，用于强调重要元素或品牌标识 */
+    --color-primary: #3578e5;
+    /* 次要颜色，通常用于背景、边框或其他次要元素，与主要颜色形成对比*/
+    --color-secondary: #ebedf0;
+    /* 表示成功状态的颜色，用于显示操作成功或积极的反馈信息 */
+    --color-success: #00a400;
+    /* 信息性的颜色，用于显示一般信息或提示 */
+    --color-info: #54c7ec;
+    /* 警告状态的颜色，用于显示警告或需要注意的信息 */
+    --color-warning: #ffba00;
+    /* 危险状态的颜色，用于显示错误、危险或失败的状态 */
+    --color-danger: #fa383e;
+
+    /* 自定义属性提供了一种灵活和可维护的方式
+    来管理网页或应用程序的排版风格和文本样式，
+    使得可以在整个项目中轻松地应用和调整字体
+    、颜色和文本属性 */
+    /* 2、字体相关属性 */
+    /* 主要字体：网页正文和标题的默认字体 */
+    --main-font-family: Arial, sans-serif;
+    /* 字体大小：设置网页上不同元素的字体大小 */
+    --base-font-size: 16px;
+
+    /* 用于管理网页或应用程序中的排版（Typography） */
+    /* 基本文本颜色的变量，
+    通常用于定义文档主体中的文本颜色 */
+    --font-color-base: var(--color-content);
+    /* 反色文本颜色的变量，
+    用于在反色背景或特定场景下的文本颜色 */
+    --font-color-base-inverse: var(--color-content-inverse);
+    /* 次要文本颜色的变量，
+    用于辅助信息或次要内容的文本颜色 */
+    --font-color-secondary: var(--color-content-secondary);
+    /* 设置为一个字体族的列表 
+    基本文本字体的变量，
+    浏览器将根据可用字体依次选择最合适的字体进行渲染*/
+    --font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont,
+        'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol';
+    /* 设置为一个等宽字体族的列表
+    等宽文本字体的变量，
+    通常用于显示代码或其他需要保持对齐的文本 */
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+        'Liberation Mono', 'Courier New', monospace;
+    /* 设置为 100%。
+    这是基本字体大小的变量，
+    表示正常文本的标准大小 */
+    --font-size-base: 100%;
+    /* 定义了不同字重的变量，
+    用于定义文本的粗细程度 */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 500;
+    --font-weight-bold: 700;
+    /* 这是基本字重的变量，
+    通常作为文本的默认字重使用 */
+    --font-weight-base: var(--font-weight-normal);
+    /* 设置为 1.65。
+    这是基本行高的变量，
+    用于定义文本行之间的间距，
+    影响文本的行高度 */
+    --line-height-base: 1.65;
+
+
+
+    /* 3、间距和尺寸属性 
+    边距和填充：用于控制元素之间的间距和内部填充
+    宽度和高度：用于定义各种元素的宽度和高度
+    */
+    /* 一个基本的间距单位，用于在整个网页或应用程序中保持一致的间距大小 */
+    --spacing-unit: 8px;
+    /* 表示小尺寸的填充，直接使用了 --spacing-unit 的值 */
+    --padding-small: var(--spacing-unit);
+    /* 表示中等尺寸的填充，是 --spacing-unit 值的两倍大小 */
+    --padding-medium: calc(2 * var(--spacing-unit));
+    /* 表示大尺寸的填充，是 --spacing-unit 值的三倍大小 */
+    --padding-large: calc(3 * var(--spacing-unit));
+    /* 这是一个元素的宽度，通常用于确保该元素铺满其父容器的宽度 */
+    --element-width: 100%;
+    /* 这是侧边栏的宽度，用于定义侧边栏的固定宽度值 */
+    --sidebar-width: 250px;
+
+    /* 4、背景和边框属性 
+    背景色和背景图像：设置网页或特定区域的背景
+    边框样式和颜色：用于装饰和区分不同的页面元素
+    */
+    --background-color: #f0f0f0;
+    --content-background-color: #ffffff;
+    --border-color: #ccc;
+    --border-width: 1px;
+    --border-radius: 4px;
+
+    /* 5、响应式设计属性 
+    媒体查询断点：定义响应式设计的断点，
+    根据不同的屏幕尺寸调整网页布局和元素样式
+    */
+    /* 用于响应式设计的媒体查询断点，
+    表示当屏幕宽度达到或超过 768 像素时，
+    特定的 CSS 样式将被应用或改变 */
+    --tablet-breakpoint: 768px;
+    /* 用于响应式设计的媒体查询断点，
+    表示当屏幕宽度达到或超过 1024 像素时，
+    特定的 CSS 样式将被应用或改变 */
+    --desktop-breakpoint: 1024px;
+    /* eg；
+@media (min-width: var(--tablet-breakpoint)) {
+    .sidebar {
+        display: block;
+    }
+}
+
+@media (min-width: var(--desktop-breakpoint)) {
+    .sidebar {
+        width: 250px;
+    }
+} */
+
+
+    /* 6、动画和过渡属性 
+    过渡持续时间和延迟：
+    定义元素过渡效果的持续时间和开始前的延迟时间
+    动画效果：设置网页中动态元素的动画效果和速度
+    */
+    /* 用于 CSS 过渡效果的持续时间，
+    表示元素从一个状态到另一个状态的动画时间 */
+    --transition-duration: 0.3s;
+    /* 用于 CSS 过渡效果的延迟时间，
+    表示动画开始前的等待时间 */
+    --transition-delay: 0s;
+    /* 用于 CSS 动画效果的速度，
+    表示动画完成一次循环所需的时间 */
+    --animation-speed: 1s;
+}
+
+:root {
+    --overflow-y: auto;
+}
+
+/* 重置一些默认样式以实现更清晰的布局 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body,
+html {
+    font-family: var(--main-font-family);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+a {
+    color: #03b126;
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header-scr {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 150px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    z-index: 1000;
+}
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.main-wrapper {
+
+    margin-top: 150px;
+}
+
+aside nav {
+    position: fixed;
+    left: 0;
+    top: 140px;
+    bottom: 0;
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    background-color: #222;
+}
+
+.sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 10px;
+}
+
+.sidebar-menu li a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-menu li a:hover {
+    background-color: #555;
+}
+
+/* 根据侧边栏宽度调整*/
+.content {
+    /* position: fixed; */
+    margin-left: 250px;
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.main-page-content {
+    flex: 1;
+    overflow-y: auto;
+
+}
+
+.main-page-content,
+.sidebar-right {
+    flex-direction: column;
+    width: 80%;
+}
+
+
+
+.sidebar-right {
+    position: fixed;
+    right: 0;
+    top: 150px;
+    width: 15%;
+    border-left: 2px solid #dadde1;
+    color: #525860;
+    display: block;
+    padding: .5rem 1rem;
+    text-decoration: none;
+}
+
+.sidebar-right ul li {
+    list-style-type: none;
+}
+
+
+
+footer {
+    width: 100%;
+    height: 100px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    z-index: 1000;
+    text-align: center;
+}

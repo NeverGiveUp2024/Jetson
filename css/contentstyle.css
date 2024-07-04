@@ -1,0 +1,148 @@
+.cen-content h2,
+.cen-content h3,
+.cen-content h4,
+.cen-content h5,
+.cen-content h6,
+.cen-content p {
+    margin: 0;
+    padding: 0;
+}
+
+.cen-content h2 {
+    font-size: 2.25rem;
+    margin-top: .5em;
+    text-align: center;
+}
+
+.cen-content h3 {
+    font-size: 1.6rem;
+    margin-left: 0.5em;
+
+}
+
+.cen-content h4 {
+    font-size: 1.4rem;
+    /* margin-top: 0.5em; */
+    margin-left: 1em;
+}
+
+.cen-content h5 {
+    font-size: 1.35rem;
+    margin-left: 1.5em;
+}
+
+.cen-content h6 {
+    font-size: 1.2rem;
+    margin-left: 2em;
+}
+
+/* 图片大小 */
+.cen-content img {
+    max-width: 80%;
+    vertical-align: middle;
+    image-orientation: from-image;
+}
+
+
+
+p>.md-image:only-child:not(.md-img-error) img,
+p>img:only-child {
+    display: block;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+
+.cen-content table img {
+    width: 100px;
+    height: auto;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 700px;
+}
+
+#headcolumn tr th {
+    width: 130px;
+}
+
+#headcolumn tr td {
+    text-align: left;
+}
+
+table tr th {
+    background-color: #ffc000;
+}
+
+table tr td,
+th {
+
+    border: #111 1px solid;
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px;
+    margin: auto 0;
+}
+
+.cen-content ul li {
+    list-style-type: none;
+    font-size: 1rem;
+    text-indent: 1rem;
+    margin-top: 10px;
+    padding-left: 1.5rem;
+}
+
+#codeblocks {
+    color: #f30010;
+    width: 800px;
+    border: 2px black solid;
+    text-indent: 2;
+}
+
+#codeblocks img {
+    margin-left: 10px;
+    padding: 0;
+}
+
+.cen-content p {
+    /* width: 800px; */
+    margin-left: 1.2em;
+    text-indent: 2rem;
+    line-height: 1.7;
+    font-size: 0.9rem;
+}
+
+.cen-content ul li p,
+.cen-content span p {
+    font-size: 1.1rem;
+}
+
+hr {
+    width: 800px;
+    margin: 10px auto;
+}
+
+
+/* 响应式 */
+@media (min-width: 1200px) {
+    .sidebar-right {
+        display: block;
+        padding-bottom: 0;
+        overflow-y: auto;
+    }
+}
+
+@media (min-width: 769px) {
+
+
+    .main-wrapper {
+        display: grid;
+        gap: 3rem;
+        grid-template-areas: "sidebar main";
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+        padding-left: 1.5rem;
+        padding-right: 3rem;
+    }
+}

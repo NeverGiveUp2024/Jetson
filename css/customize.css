@@ -1,0 +1,461 @@
+:root {
+	--ifm-color-primary: #2e8555;
+	--ifm-color-primary-dark: #29784c;
+	--ifm-color-primary-darker: #277148;
+	--ifm-color-primary-darkest: #205d3b;
+	--ifm-color-primary-light: #33925d;
+	--ifm-color-primary-lighter: #359962;
+	--ifm-color-primary-lightest: #3cad6e;
+	--ifm-code-font-size: 95%;
+	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+	--text-top-color: white;
+}
+
+
+:root {
+	--ifm-color-scheme: light;
+	/* Colors. */
+	--ifm-dark-value: 10%;
+	--ifm-darker-value: 15%;
+	--ifm-darkest-value: 30%;
+	--ifm-light-value: 15%;
+	--ifm-lighter-value: 30%;
+	--ifm-lightest-value: 50%;
+
+	/*
+	This seems like a lot, but we want to ensure enough contrast.
+	Goal is to have a min score of 3 on https://www.myndex.com/APCA/fullmatrix
+	For fontWeight 400 + score 3, the cell must show a value < 16px (fontsize we use in places like alerts)
+	See  also https://github.com/facebookincubator/infima/issues/55#issuecomment-884023075
+	 */
+	--ifm-contrast-background-value: 90%;
+	--ifm-contrast-foreground-value: 70%;
+	/* Using slightly different values for dark mode */
+	--ifm-contrast-background-dark-value: 70%;
+	--ifm-contrast-foreground-dark-value: 90%;
+
+	--ifm-color-primary: #3578e5;
+	--ifm-color-secondary: #ebedf0;
+	--ifm-color-success: #00a400;
+	--ifm-color-info: #54c7ec;
+	--ifm-color-warning: #ffba00;
+	--ifm-color-danger: #fa383e;
+	--ifm-color-primary-dark: rgb(48, 108, 206);
+	--ifm-color-primary-darker: rgb(45, 102, 195);
+	--ifm-color-primary-darkest: rgb(37, 84, 160);
+	--ifm-color-primary-light: rgb(83, 140, 233);
+	--ifm-color-primary-lighter: rgb(114, 161, 237);
+	--ifm-color-primary-lightest: rgb(154, 188, 242);
+	--ifm-color-primary-contrast-background: rgb(235, 242, 252);
+	--ifm-color-primary-contrast-foreground: rgb(16, 36, 69);
+	--ifm-color-secondary-dark: rgb(212, 213, 216);
+	--ifm-color-secondary-darker: rgb(200, 201, 204);
+	--ifm-color-secondary-darkest: rgb(164, 166, 168);
+	--ifm-color-secondary-light: rgb(238, 240, 242);
+	--ifm-color-secondary-lighter: rgb(241, 242, 245);
+	--ifm-color-secondary-lightest: rgb(245, 246, 248);
+	--ifm-color-secondary-contrast-background: rgb(253, 253, 254);
+	--ifm-color-secondary-contrast-foreground: rgb(71, 71, 72);
+	--ifm-color-success-dark: rgb(0, 148, 0);
+	--ifm-color-success-darker: rgb(0, 139, 0);
+	--ifm-color-success-darkest: rgb(0, 115, 0);
+	--ifm-color-success-light: rgb(38, 178, 38);
+	--ifm-color-success-lighter: rgb(77, 191, 77);
+	--ifm-color-success-lightest: rgb(128, 210, 128);
+	--ifm-color-success-contrast-background: rgb(230, 246, 230);
+	--ifm-color-success-contrast-foreground: rgb(0, 49, 0);
+	--ifm-color-info-dark: rgb(76, 179, 212);
+	--ifm-color-info-darker: rgb(71, 169, 201);
+	--ifm-color-info-darkest: rgb(59, 139, 165);
+	--ifm-color-info-light: rgb(110, 207, 239);
+	--ifm-color-info-lighter: rgb(135, 216, 242);
+	--ifm-color-info-lightest: rgb(170, 227, 246);
+	--ifm-color-info-contrast-background: rgb(238, 249, 253);
+	--ifm-color-info-contrast-foreground: rgb(25, 60, 71);
+	--ifm-color-warning-dark: rgb(230, 167, 0);
+	--ifm-color-warning-darker: rgb(217, 158, 0);
+	--ifm-color-warning-darkest: rgb(179, 130, 0);
+	--ifm-color-warning-light: rgb(255, 196, 38);
+	--ifm-color-warning-lighter: rgb(255, 207, 77);
+	--ifm-color-warning-lightest: rgb(255, 221, 128);
+	--ifm-color-warning-contrast-background: rgb(255, 248, 230);
+	--ifm-color-warning-contrast-foreground: rgb(77, 56, 0);
+	--ifm-color-danger-dark: rgb(225, 50, 56);
+	--ifm-color-danger-darker: rgb(213, 48, 53);
+	--ifm-color-danger-darkest: rgb(175, 39, 43);
+	--ifm-color-danger-light: rgb(251, 86, 91);
+	--ifm-color-danger-lighter: rgb(251, 116, 120);
+	--ifm-color-danger-lightest: rgb(253, 156, 159);
+	--ifm-color-danger-contrast-background: rgb(255, 235, 236);
+	--ifm-color-danger-contrast-foreground: rgb(75, 17, 19);
+
+	--ifm-color-white: #fff;
+	--ifm-color-black: #000;
+
+	--ifm-color-gray-0: var(--ifm-color-white);
+	--ifm-color-gray-100: #f5f6f7;
+	--ifm-color-gray-200: #ebedf0;
+	--ifm-color-gray-300: #dadde1;
+	--ifm-color-gray-400: #ccd0d5;
+	--ifm-color-gray-500: #bec3c9;
+	--ifm-color-gray-600: #8d949e;
+	--ifm-color-gray-700: #606770;
+	--ifm-color-gray-800: #444950;
+	--ifm-color-gray-900: #1c1e21;
+	--ifm-color-gray-1000: var(--ifm-color-black);
+
+	--ifm-color-emphasis-0: var(--ifm-color-gray-0);
+	--ifm-color-emphasis-100: var(--ifm-color-gray-100);
+	--ifm-color-emphasis-200: var(--ifm-color-gray-200);
+	--ifm-color-emphasis-300: var(--ifm-color-gray-300);
+	--ifm-color-emphasis-400: var(--ifm-color-gray-400);
+	--ifm-color-emphasis-500: var(--ifm-color-gray-500);
+	--ifm-color-emphasis-600: var(--ifm-color-gray-600);
+	--ifm-color-emphasis-700: var(--ifm-color-gray-700);
+	--ifm-color-emphasis-800: var(--ifm-color-gray-800);
+	--ifm-color-emphasis-900: var(--ifm-color-gray-900);
+	--ifm-color-emphasis-1000: var(--ifm-color-gray-1000);
+
+	/* Base. */
+	--ifm-color-content: var(--ifm-color-emphasis-900);
+	--ifm-color-content-inverse: var(--ifm-color-emphasis-0);
+	--ifm-color-content-secondary: #525860;
+
+	--ifm-background-color: transparent;
+	/* Body's background. */
+	--ifm-background-surface-color: var(--ifm-color-content-inverse);
+	--ifm-global-border-width: 1px;
+	--ifm-global-radius: 0.4rem;
+
+	--ifm-hover-overlay: rgba(0, 0, 0, 0.05);
+
+	/* Typography. */
+	--ifm-font-color-base: var(--ifm-color-content);
+	--ifm-font-color-base-inverse: var(--ifm-color-content-inverse);
+	--ifm-font-color-secondary: var(--ifm-color-content-secondary);
+	--ifm-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont,
+		'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+		'Segoe UI Emoji', 'Segoe UI Symbol';
+	--ifm-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+		'Liberation Mono', 'Courier New', monospace;
+	--ifm-font-size-base: 100%;
+
+	--ifm-font-weight-light: 300;
+	--ifm-font-weight-normal: 400;
+	--ifm-font-weight-semibold: 500;
+	--ifm-font-weight-bold: 700;
+
+	--ifm-font-weight-base: var(--ifm-font-weight-normal);
+	--ifm-line-height-base: 1.65;
+
+	/* Spacing. */
+	--ifm-global-spacing: 1rem;
+	--ifm-spacing-vertical: var(--ifm-global-spacing);
+	--ifm-spacing-horizontal: var(--ifm-global-spacing);
+
+	/* Transitions. */
+	--ifm-transition-fast: 200ms;
+	--ifm-transition-slow: 400ms;
+	--ifm-transition-timing-default: cubic-bezier(0.08, 0.52, 0.52, 1);
+
+	/* Shadows. */
+	--ifm-global-shadow-lw: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+	--ifm-global-shadow-md: 0 5px 40px rgba(0, 0, 0, 0.2);
+	--ifm-global-shadow-tl: 0 12px 28px 0 rgba(0, 0, 0, 0.2),
+		0 2px 4px 0 rgba(0, 0, 0, 0.1);
+
+	/* Z-index. */
+	--ifm-z-index-dropdown: 100;
+	--ifm-z-index-fixed: 200;
+	--ifm-z-index-overlay: 400;
+	--ifm-container-width: 1140px;
+	--ifm-container-width-xl: 1320px;
+	--ifm-code-background: rgb(246, 247, 248);
+	--ifm-code-border-radius: var(--ifm-global-radius);
+	--ifm-code-font-size: 90%;
+	--ifm-code-padding-horizontal: 0.1rem;
+	--ifm-code-padding-vertical: 0.1rem;
+
+	--ifm-pre-background: var(--ifm-code-background);
+	--ifm-pre-border-radius: var(--ifm-code-border-radius);
+	--ifm-pre-color: inherit;
+	--ifm-pre-line-height: 1.45;
+	--ifm-pre-padding: 1rem;
+	--ifm-heading-color: inherit;
+	--ifm-heading-margin-top: 0;
+	--ifm-heading-margin-bottom: var(--ifm-spacing-vertical);
+	--ifm-heading-font-family: var(--ifm-font-family-base);
+	--ifm-heading-font-weight: var(--ifm-font-weight-bold);
+	--ifm-heading-line-height: 1.25;
+
+	--ifm-h1-font-size: 2rem;
+	--ifm-h2-font-size: 1.5rem;
+	--ifm-h3-font-size: 1.25rem;
+	--ifm-h4-font-size: 1rem;
+	--ifm-h5-font-size: 0.875rem;
+	--ifm-h6-font-size: 0.85rem;
+	--ifm-image-alignment-padding: 1.25rem;
+	/* Leading is the distance between two baselines */
+	/* TODO: add appropriate mobile leading */
+	--ifm-leading-desktop: 1.25;
+	--ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
+	--ifm-list-left-padding: 2rem;
+	--ifm-list-margin: 1rem;
+	--ifm-list-item-margin: 0.25rem;
+	--ifm-list-paragraph-margin: 1rem;
+	--ifm-table-cell-padding: 0.75rem;
+
+	--ifm-table-background: transparent;
+	--ifm-table-stripe-background: rgba(0, 0, 0, 0.03);
+
+	--ifm-table-border-width: 1px;
+	--ifm-table-border-color: var(--ifm-color-emphasis-300);
+
+	--ifm-table-head-background: inherit;
+	--ifm-table-head-color: inherit;
+	--ifm-table-head-font-weight: var(--ifm-font-weight-bold);
+
+	--ifm-table-cell-color: inherit;
+	/* Links. */
+	--ifm-link-color: var(--ifm-color-primary);
+	--ifm-link-decoration: none;
+	--ifm-link-hover-color: var(--ifm-link-color);
+	--ifm-link-hover-decoration: underline;
+
+	/* Paragraphs. */
+	--ifm-paragraph-margin-bottom: var(--ifm-leading);
+
+	/* Blockquotes. */
+	--ifm-blockquote-font-size: var(--ifm-font-size-base);
+	--ifm-blockquote-border-left-width: 2px;
+	--ifm-blockquote-padding-horizontal: var(--ifm-spacing-horizontal);
+	--ifm-blockquote-padding-vertical: 0;
+	--ifm-blockquote-shadow: none;
+	--ifm-blockquote-color: var(--ifm-color-emphasis-800);
+	--ifm-blockquote-border-color: var(--ifm-color-emphasis-300);
+
+	/* Horizontal Rules. */
+	--ifm-hr-background-color: var(--ifm-color-emphasis-500);
+	--ifm-hr-height: 1px;
+	--ifm-hr-margin-vertical: 1.5rem;
+	--ifm-scrollbar-size: 7px;
+	--ifm-scrollbar-track-background-color: #f1f1f1;
+	--ifm-scrollbar-thumb-background-color: #c0c0c0;
+	--ifm-scrollbar-thumb-hover-background-color: #a7a7a7;
+	--ifm-alert-background-color: inherit;
+	/* Set a default which will be overridden later. */
+	--ifm-alert-border-color: inherit;
+	/* Set a default which will be overridden later. */
+	--ifm-alert-border-radius: var(--ifm-global-radius);
+	--ifm-alert-border-width: 0px;
+	/* For users that want to easily add a border */
+	--ifm-alert-border-left-width: 5px;
+	--ifm-alert-color: var(--ifm-font-color-base);
+	--ifm-alert-padding-horizontal: var(--ifm-spacing-horizontal);
+	--ifm-alert-padding-vertical: var(--ifm-spacing-vertical);
+	--ifm-alert-shadow: var(--ifm-global-shadow-lw);
+	--ifm-avatar-intro-margin: 1rem;
+	--ifm-avatar-intro-alignment: inherit;
+	--ifm-avatar-photo-size: 3rem;
+	--ifm-badge-background-color: inherit;
+	/* Set a default which will be overridden later. */
+	--ifm-badge-border-color: inherit;
+	/* Set a default which will be overridden later. */
+	--ifm-badge-border-radius: var(--ifm-global-radius);
+	--ifm-badge-border-width: var(--ifm-global-border-width);
+	--ifm-badge-color: var(--ifm-color-white);
+	--ifm-badge-padding-horizontal: calc(var(--ifm-spacing-horizontal) * 0.5);
+	--ifm-badge-padding-vertical: calc(var(--ifm-spacing-vertical) * 0.25);
+	--ifm-breadcrumb-border-radius: 1.5rem;
+	--ifm-breadcrumb-spacing: 0.5rem;
+	--ifm-breadcrumb-color-active: var(--ifm-color-primary);
+	--ifm-breadcrumb-item-background-active: var(--ifm-hover-overlay);
+	--ifm-breadcrumb-padding-horizontal: 0.8rem;
+	--ifm-breadcrumb-padding-vertical: 0.4rem;
+	--ifm-breadcrumb-size-multiplier: 1;
+	--ifm-breadcrumb-separator: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 256 256"><g><g><polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>');
+	--ifm-breadcrumb-separator-filter: none;
+	--ifm-breadcrumb-separator-size: 0.5rem;
+	--ifm-breadcrumb-separator-size-multiplier: 1.25;
+	--ifm-button-background-color: inherit;
+	--ifm-button-border-color: var(--ifm-button-background-color);
+	--ifm-button-border-width: var(--ifm-global-border-width);
+	--ifm-button-color: var(--ifm-font-color-base-inverse);
+	--ifm-button-font-weight: var(--ifm-font-weight-bold);
+	--ifm-button-padding-horizontal: 1.5rem;
+	--ifm-button-padding-vertical: 0.375rem;
+	--ifm-button-size-multiplier: 1;
+	--ifm-button-transition-duration: var(--ifm-transition-fast);
+	--ifm-button-border-radius: calc(var(--ifm-global-radius) * var(--ifm-button-size-multiplier));
+	--ifm-button-group-spacing: 2px;
+	--ifm-card-background-color: var(--ifm-background-surface-color);
+	--ifm-card-border-radius: calc(var(--ifm-global-radius) * 2);
+	--ifm-card-horizontal-spacing: var(--ifm-global-spacing);
+	--ifm-card-vertical-spacing: var(--ifm-global-spacing);
+	--ifm-toc-border-color: var(--ifm-color-emphasis-300);
+	--ifm-toc-link-color: var(--ifm-color-content-secondary);
+	--ifm-toc-padding-vertical: 0.5rem;
+	--ifm-toc-padding-horizontal: 0.5rem;
+	--ifm-dropdown-background-color: var(--ifm-background-surface-color);
+	--ifm-dropdown-font-weight: var(--ifm-font-weight-semibold);
+	--ifm-dropdown-link-color: var(--ifm-font-color-base);
+	--ifm-dropdown-hover-background-color: var(--ifm-hover-overlay);
+	--ifm-footer-background-color: var(--ifm-color-emphasis-100);
+	--ifm-footer-color: inherit;
+	--ifm-footer-link-color: var(--ifm-color-emphasis-700);
+	--ifm-footer-link-hover-color: var(--ifm-color-primary);
+	--ifm-footer-link-horizontal-spacing: 0.5rem;
+	--ifm-footer-padding-horizontal: calc(var(--ifm-spacing-horizontal) * 2);
+	--ifm-footer-padding-vertical: calc(var(--ifm-spacing-vertical) * 2);
+	--ifm-footer-title-color: inherit;
+	--ifm-footer-logo-max-width: min(30rem, 90vw);
+	--ifm-hero-background-color: var(--ifm-background-surface-color);
+	--ifm-hero-text-color: var(--ifm-color-emphasis-800);
+	--ifm-menu-color: var(--ifm-color-emphasis-700);
+	--ifm-menu-color-active: var(--ifm-color-primary);
+	--ifm-menu-color-background-active: var(--ifm-hover-overlay);
+	--ifm-menu-color-background-hover: var(--ifm-hover-overlay);
+	--ifm-menu-link-padding-horizontal: 0.75rem;
+	--ifm-menu-link-padding-vertical: 0.375rem;
+	--ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(0,0,0,0.5)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
+	--ifm-menu-link-sublist-icon-filter: none;
+	--ifm-navbar-background-color: var(--ifm-background-surface-color);
+	--ifm-navbar-height: 3.75rem;
+	--ifm-navbar-item-padding-horizontal: 0.75rem;
+	--ifm-navbar-item-padding-vertical: 0.25rem;
+	--ifm-navbar-link-color: var(--ifm-font-color-base);
+	--ifm-navbar-link-hover-color: var(--ifm-color-primary);
+	--ifm-navbar-link-active-color: var(--ifm-link-color);
+	--ifm-navbar-padding-horizontal: var(--ifm-spacing-horizontal);
+	--ifm-navbar-padding-vertical: calc(var(--ifm-spacing-vertical) * 0.5);
+	--ifm-navbar-shadow: var(--ifm-global-shadow-lw);
+	--ifm-navbar-search-input-background-color: var(--ifm-color-emphasis-200);
+	--ifm-navbar-search-input-color: var(--ifm-color-emphasis-800);
+	--ifm-navbar-search-input-placeholder-color: var(--ifm-color-emphasis-500);
+	--ifm-navbar-search-input-icon: url('data:image/svg+xml;utf8,<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="16px" width="16px"><path d="M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z" /></svg>');
+	--ifm-navbar-sidebar-width: 83vw;
+	--ifm-pagination-border-radius: var(--ifm-global-radius);
+	--ifm-pagination-color-active: var(--ifm-color-primary);
+	--ifm-pagination-font-size: 1rem;
+	--ifm-pagination-item-active-background: var(--ifm-hover-overlay);
+	--ifm-pagination-page-spacing: 0.2em;
+	--ifm-pagination-padding-horizontal: calc(var(--ifm-spacing-horizontal) * 1);
+	--ifm-pagination-padding-vertical: calc(var(--ifm-spacing-vertical) * 0.25);
+	--ifm-pagination-nav-border-radius: var(--ifm-global-radius);
+	--ifm-pagination-nav-color-hover: var(--ifm-color-primary);
+	--ifm-pills-color-active: var(--ifm-color-primary);
+	--ifm-pills-color-background-active: var(--ifm-hover-overlay);
+	--ifm-pills-spacing: 0.125rem;
+	--ifm-tabs-color: var(--ifm-font-color-secondary);
+	--ifm-tabs-color-active: var(--ifm-color-primary);
+	--ifm-tabs-color-active-border: var(--ifm-tabs-color-active);
+	--ifm-tabs-padding-horizontal: 1rem;
+	--ifm-tabs-padding-vertical: 1rem;
+}
+
+
+/**
+--primary-color: 主要颜色，用于整体主题色设置。
+--secondary-color: 次要颜色，用于辅助主题色设置。
+--background-color: 背景颜色，用于整个页面或组件的背景色。
+--text-color: 文字颜色，用于页面上的文本颜色设置。
+--link-color: 链接颜色，用于超链接的文本颜色。
+--hover-color: 悬停颜色，用于鼠标悬停在元素上时的颜色变化。
+--border-color: 边框颜色，用于元素边框的颜色设置。
+--font-family: 字体系列，用于设置页面的整体字体。
+--font-size: 字体大小，用于设置页面上的文本字号。
+--line-height: 行高，用于控制文本行与行之间的间距。
+--margin: 外边距，用于元素与其他元素之间的间距设置。
+--padding: 内边距，用于元素内容与边框之间的间距设置。
+--box-shadow: 阴影效果，用于添加元素的投影效果。
+--opacity: 透明度，用于设置元素的不透明度。
+--transition: 过渡效果，用于元素状态变化时的平滑过渡设置。
+--z-index: 层叠顺序，用于控制元素在层叠上下文中的显示顺序。
+--max-width: 最大宽度，用于限制元素的最大宽度。
+--min-width: 最小宽度，用于限制元素的最小宽度。
+--max-height: 最大高度，用于限制元素的最大高度。
+--min-height: 最小高度，用于限制元素的最小高度。
+--display: 显示模式，用于控制元素的显示方式，如块级、内联等。
+--position: 定位方式，用于控制元素的定位方式，如相对定位、绝对定位等。
+--justify-content: 主轴对齐方式，用于控制 Flexbox 布局中项目在主轴上的对齐方式。
+--align-items: 交叉轴对齐方式，用于控制 Flexbox 布局中项目在交叉轴上的对齐方式。
+--flex-direction: 弹性方向，用于控制 Flexbox 布局中主轴的方向。
+--flex-wrap: 弹性换行，用于控制 Flexbox 布局中项目的换行方式。
+--flex-grow: 弹性增长，用于控制 Flexbox 布局中项目的增长比例。
+--flex-shrink: 弹性收缩，用于控制 Flexbox 布局中项目的收缩比例。
+--grid-template-columns: 网格列模板，用于控制 CSS Grid 布局中列的大小和数量。
+--grid-template-rows: 网格行模板，用于控制 CSS Grid 布局中行的大小和数量。
+--grid-column-gap: 网格列间距，用于控制 CSS Grid 布局中列之间的间距。
+--grid-row-gap: 网格行间距，用于控制 CSS Grid 布局中行之间的间距。
+--grid-area: 网格区域，用于定义 CSS Grid 布局中的具体区域。
+--grid-column-start: 网格列起始位置，用于定义 CSS Grid 布局中项目的起始列位置。
+--grid-column-end: 网格列结束位置，用于定义 CSS Grid 布局中项目的结束列位置。
+--grid-row-start: 网格行起始位置，用于定义 CSS Grid 布局中项目的起始行位置。
+--grid-row-end: 网格行结束位置，用于定义 CSS Grid 布局中项目的结束行位置。
+--text-align: 文本对齐方式，用于设置文本在元素内的水平对齐方式。
+--vertical-align: 垂直对齐方式，用于设置元素内容在垂直方向上的对齐方式。
+--overflow: 溢出处理，用于控制元素内容溢出时的显示或隐藏方式。
+--white-space: 空白处理，用于控制元素内空白字符的处理方式。
+--text-decoration: 文本装饰，用于设置文本的下划线、删除线等装饰效果。
+--text-transform: 文本转换，用于设置文本的大小写转换效果，如大写、小写、首字母大写等。
+--word-break: 单词换行，用于控制长单词或URL在需要时如何换行显示。
+--word-wrap: 单词包裹，用于控制长单词或URL在需要时如何包裹显示。
+--outline: 外边框，用于设置元素的外边框样式和颜色。
+--outline-offset: 外边框偏移，用于控制元素的外边框与边缘的距离。
+--cursor: 鼠标样式，用于设置鼠标悬停在元素上时的光标样式。
+--pointer-events: 指针事件，用于控制元素是否接受鼠标事件的响应。
+--user-select: 用户选择，用于控制用户是否可以选择元素内的文本内容。
+继续列表：
+--text-overflow: 文本溢出，用于控制文本内容溢出元素时的处理方式。
+--transform: 变换效果，用于对元素进行旋转、缩放、倾斜或移动等变换操作。
+--transform-origin: 变换原点，用于指定元素变换的基准点。
+--filter: 滤镜效果，用于对元素应用图像滤镜效果，如模糊、饱和度调整等。
+--backdrop-filter: 背景滤镜，用于对元素背景应用图像滤镜效果。
+--visibility: 可见性，用于控制元素的可见性状态，可设置为可见或隐藏。
+--opacity: 不透明度，用于控制元素的透明度，值范围为0（完全透明）到1（完全不透明）。
+--mix-blend-mode: 混合模式，用于控制元素与其背景之间的混合效果。
+--overflow-x: 水平溢出处理，用于控制元素在水平方向上内容溢出时的显示方式。
+--overflow-y: 垂直溢出处理，用于控制元素在垂直方向上内容溢出时的显示方式。
+--box-sizing: 盒模型尺寸，用于控制元素的盒模型计算方式，可设置为 content-box 或 border-box。
+--object-fit: 对象适应方式，用于控制元素内图像或视频在容器中的适应方式。
+--object-position: 对象位置，用于设置元素内图像或视频的位置。
+--content: 内容，用于插入元素的内容。
+--counter-reset: 计数器重置，用于重置CSS计数器的值。
+--counter-increment: 计数器增加，用于增加CSS计数器的值。
+--quotes: 引号，用于设置元素中引用文本的前后引号样式。
+--page-break-before: 分页前，用于设置在元素前插入分页符的方式。
+--page-break-after: 分页后，用于设置在元素后插入分页符的方式。
+--page-break-inside: 分页内，用于设置在元素内部插入分页符的方式。
+--content-visibility: 内容可见性，用于控制内容的可见性，以提高性能。
+--scroll-behavior: 滚动行为，用于设置页面滚动时的平滑滚动效果。
+--scroll-snap-type: 滚动捕捉类型，用于设置滚动容器的滚动捕捉行为。
+--scroll-padding: 滚动填充，用于控制滚动容器内容的内边距。
+--scroll-margin: 滚动边距，用于控制滚动容器内容的外边距。
+进一步列表：
+--animation: 动画效果，用于定义元素的动画效果。
+--animation-name: 动画名称，用于指定应用于元素的动画名称。
+--animation-duration: 动画持续时间，用于设置元素动画的持续时间。
+--animation-timing-function: 动画时间函数，用于设置元素动画的时间函数。
+--animation-delay: 动画延迟，用于设置元素动画开始之前的延迟时间。
+--animation-iteration-count: 动画迭代次数，用于设置元素动画的重复次数。
+--animation-direction: 动画方向，用于设置元素动画播放的方向。
+--animation-fill-mode: 动画填充模式，用于设置元素动画在非播放时的状态。
+--animation-play-state: 动画播放状态，用于设置元素动画的播放状态。
+--transition-property: 过渡属性，用于定义应用过渡效果的CSS属性。
+--transition-duration: 过渡持续时间，用于设置元素过渡效果的持续时间。
+--transition-timing-function: 过渡时间函数，用于设置元素过渡效果的时间函数。
+--transition-delay: 过渡延迟，用于设置元素过渡效果开始之前的延迟时间。
+--cursor: 鼠标指针，用于设置元素悬停时鼠标指针的样式。
+--resize: 调整大小，用于控制元素是否允许用户调整大小。
+--appearance: 外观，用于设置元素的外观渲染方式。
+--user-modify: 用户修改，用于控制元素内文本是否允许用户修改。
+--content-visibility: 内容可见性，用于控制元素内容的可见性，以提高性能。
+--backface-visibility: 背面可见性，用于设置元素背面在3D转换中的可见性。
+--shape-outside: 外形环绕，用于设置元素周围内容的外形环绕方式。
+--shape-margin: 外形边距，用于控制元素周围内容的外形边距。
+--image-rendering: 图像渲染，用于设置元素内图像的渲染质量。
+--will-change: 将要改变，用于告知浏览器元素将要发生改变，以优化性能。
+--overscroll-behavior: 滚动溢出行为，用于控制滚动容器边界处的行为。
+--text-orientation: 文本方向，用于控制文本的方向，如横排、竖排等。
+
+*/
